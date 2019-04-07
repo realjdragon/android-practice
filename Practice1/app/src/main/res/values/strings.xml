@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Practice1</string>
+    <string name="main_title">홈메인</string>
     <string name="main_list_name">딜카드 리스트</string>
 </resources>
