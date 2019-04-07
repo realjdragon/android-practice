@@ -55,7 +55,6 @@ public class HomeMainApiClient {
                             // AdapterView는 ViewGroup에서 파생되는 클래스임.
                             // 다수의 항목을 열거할 때 사용하는 뷰들을 총칭하여 AdapterView라고 함!
                             // AdapterView라고 부르는 이유는 UI에 표시할 항목을 adapter라는 객체에서 공급받기 때문
-                            // 그러면 adapter라는 것도 만들어야겄네? 아래에서 만들어보자
                             ListView listView = (ListView)activity.findViewById(R.id.itemDealList);
 
                             // ItemDeal 객체의 정보들(이미지, 상품명)를 적절하게 보여줄 뷰로 만들어주는 Adapter클래스 객체생성

@@ -38,7 +38,7 @@ public class ItemDealAdapter extends BaseAdapter {
     // ListView의 특정 위치(position)에 해당하는 Data를 리턴하는 메소드
     @Override
     public Object getItem(int position) {
-        return deals.get(position);//deals 특정 인덱스 위치 객체 리턴.
+        return deals.get(position);
     }
 
     // 특정 위치(position)의 data(ItemDeal)을 지칭하는 아이디를 리턴하는 메소드
