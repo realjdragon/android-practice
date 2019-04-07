@@ -1,4 +1,4 @@
-package com.cookandroid.practice1;
+package com.cookandroid.practice1.entity;
 
 // 상품 딜
 public class ItemDeal {

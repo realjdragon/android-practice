@@ -1,4 +1,4 @@
-package com.cookandroid.practice1;
+package com.cookandroid.practice1.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.cookandroid.practice1.R;
+import com.cookandroid.practice1.adapter.ItemDealAdapter;
+import com.cookandroid.practice1.entity.ItemDeal;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,10 +61,6 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             for (int i=0; i < itemList.length(); i++) {
-                                if (i == 15){
-                                    break;
-                                }
-
                                 deals.add(new ItemDeal(itemList.getJSONObject(i).getString("ImageUrl")
                                         , itemList.getJSONObject(i).getString("ItemTitle")));
                             }
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                    Toast.makeText(getApplicationContext(), deals.get(i).name,
+                                    Toast.makeText(getApplicationContext(), deals.get(i).getName(),
                                             Toast.LENGTH_SHORT).show();
                                 }
                             });

@@ -1,4 +1,4 @@
-package com.cookandroid.practice1;
+package com.cookandroid.practice1.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.cookandroid.practice1.DownloadImageTask;
+import com.cookandroid.practice1.entity.ItemDeal;
+import com.cookandroid.practice1.R;
 
 import java.util.ArrayList;
 
