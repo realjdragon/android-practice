@@ -13,6 +13,9 @@ import com.cookandroid.practice1.R;
 
 import java.util.ArrayList;
 
+// 딜카드 커스텀 어댑터
+// BaseAdatper를 상속받음
+// getCount, getItem, getItemId 이 세가지는 BaseAdatper에도 구현이 안 되어 있으니 직접 구현해야함.
 public class ItemDealAdapter extends BaseAdapter {
     ArrayList<ItemDeal> deals;
 
@@ -29,7 +32,7 @@ public class ItemDealAdapter extends BaseAdapter {
     // ItemDealAdapter 객체가 만들어낼 View의 개수를 리턴하는 메소드
     @Override
     public int getCount() {
-        return deals.size();
+        return deals.size() > 15 ? 15 : deals.size();
     }
 
     // ListView의 특정 위치(position)에 해당하는 Data를 리턴하는 메소드

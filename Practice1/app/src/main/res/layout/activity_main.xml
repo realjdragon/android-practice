@@ -11,7 +11,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="딜카드 리스트"
+        android:text="@string/main_list_name"
         android:textStyle="bold"
         android:gravity="center"
         android:background="#dddddd"/>
