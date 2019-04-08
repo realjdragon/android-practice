@@ -26,7 +26,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 public class MainActivity extends AppCompatActivity {
     ListView itemListView;
 
-    SwipeRefreshLayout homeMainSwipeRefreshLayout;
+    SwipeRefreshLayout mobileHomeSwipeRefreshLayout;
 
     ArrayList<ItemDeal> deals;
 
@@ -64,13 +64,7 @@ public class MainActivity extends AppCompatActivity {
         itemListView.setAdapter(adapter);
 
         // 스와이프 새로고침 설정
-        homeMainSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.home_main_swipe_layout);
-        homeMainSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                setMobileHome();
-            }
-        });
+        setMobileHomeSwipeRefreshLayout();
 
         // API 호출해서 ListView Set
         setMobileHome();
@@ -103,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
                             adapter.notifyDataSetChanged();
 
-                            homeMainSwipeRefreshLayout.setRefreshing(false);
+                            mobileHomeSwipeRefreshLayout.setRefreshing(false);
                         }
                         catch (JSONException e){
                             e.printStackTrace();
@@ -117,5 +111,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    private void setMobileHomeSwipeRefreshLayout() {
+        mobileHomeSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.home_main_swipe_layout);
+        mobileHomeSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                setMobileHome();
+            }
+        });
     }
 }

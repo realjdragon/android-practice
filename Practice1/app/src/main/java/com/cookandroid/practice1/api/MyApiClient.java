@@ -15,7 +15,7 @@ public class MyApiClient {
     public void getMobileHome(Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener)
     {
         String url = urlPrefix
-            + "/api/Home/GetMobileHomeMainV2";
+            + "";
 
         // Volley는 onResponse, onErrorResponse 리스너를 정의하는걸 강제하고 있음.
         JsonObjectRequest request = new JsonObjectRequest(
