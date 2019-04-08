@@ -2,14 +2,35 @@ package com.cookandroid.practice1.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
+import com.cookandroid.practice1.adapter.ItemDealAdapter;
 import com.cookandroid.practice1.api.HomeMainApiClient;
+import com.cookandroid.practice1.entity.ItemDeal;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 // Activity는 화면을 구성하는 가장 기본적인 컴포넌트
 // 모든 Activity는 Activity 클래스를 상속받음
 // AppCompatActivity는 안드로이드 하위 버전을 지원하는 액티비티
 public class MainActivity extends AppCompatActivity {
+    ArrayList<ItemDeal> deals;
+
+    // ItemDeal 객체의 정보들(이미지, 상품명)를 적절하게 보여줄 뷰로 만들어주는 Adapter클래스 객체생성
+    // 이 예제에서는 ItemDealAdapter.java 파일로 클래스를 설계하였음.
+    // getLayoutInflater : xml 레이아웃 파일을 객체로 만들어 줌
+    ItemDealAdapter adapter;
 
     // Activity 클래스를 상속받아 액티비티 생명 주기에 따른 이벤트 리스너를 Override
     // 액티비티가 처음 만들어 졌을 때 호출됨
@@ -27,11 +48,65 @@ public class MainActivity extends AppCompatActivity {
         // 제목 설정
         setTitle(R.string.main_title);
 
+        deals = new ArrayList<ItemDeal>();
+
+        adapter = new ItemDealAdapter(getLayoutInflater(), deals);
+
+        // AdapterView는 ViewGroup에서 파생되는 클래스임.
+        // 다수의 항목을 열거할 때 사용하는 뷰들을 총칭하여 AdapterView라고 함!
+        // AdapterView라고 부르는 이유는 UI에 표시할 항목을 adapter라는 객체에서 공급받기 때문
+        ListView listView = (ListView)findViewById(R.id.itemDealList);
+
+        // 위에 만든 Adapter 객체를 ListView에 설정.
+        listView.setAdapter(adapter);
+
+        // 아이템을 클릭했을 때 토스트
+        // 이런 식으로 한 개의 View 객체에 접근할 수 있으므로 사용자와 상호작용 가능
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getApplicationContext(), deals.get(i).getName(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // API 호출해서 ListView Set
         // 안드로이드는 안정성의 이유로 Main Thread (UI Thread)에서만 UI를 변경할 수 있도록 제한됨
         // 또, Main Thread에서 네트워크작업도 제한됨..5초 이상의 지연이 있을 경우 App 종료..
         // 따라서 별도의 Thread를 구성하고 네트워크 작업을 해야하는데 매번 이러긴 귀찮으니
         // Volley라는 패키지를 사용해서 손 쉽게 API를 호출하고 response 후에 UI 작업까지 할 수 있음.
-        new HomeMainApiClient().setMainActivityList(this);
+        new HomeMainApiClient().setMainActivityList(
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject data = response.getJSONObject("Data");
+                            JSONArray homeMainGroupList = data.getJSONArray("HomeMainGroupList");
+                            JSONArray itemList = new JSONArray();
+                            for (int i=0; i < homeMainGroupList.length(); i++) {
+                                if (homeMainGroupList.getJSONObject(i).getInt("Type") == 3){
+                                    itemList = homeMainGroupList.getJSONObject(i).getJSONArray("ItemList");
+
+                                    for (int j=0; j < itemList.length(); j++) {
+                                        deals.add(new ItemDeal(itemList.getJSONObject(j).getString("ImageUrl")
+                                                , itemList.getJSONObject(j).getString("ItemTitle")));
+                                    }
+                                }
+                            }
+
+                            adapter.notifyDataSetChanged();
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("VOLLEY", error.getMessage());
+                    }
+                }
+        );
     }
 }
