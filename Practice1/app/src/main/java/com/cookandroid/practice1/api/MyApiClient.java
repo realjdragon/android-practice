@@ -3,6 +3,7 @@ package com.cookandroid.practice1.api;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.cookandroid.practice1.MyApplication;
 
 import org.json.JSONObject;
 
@@ -33,6 +34,6 @@ public class MyApiClient {
             }
         };
 
-        ApiClient.getInstance().addRequestQueue(request);
+        MyApplication.getRequestQueue().add(request);
     }
 }
