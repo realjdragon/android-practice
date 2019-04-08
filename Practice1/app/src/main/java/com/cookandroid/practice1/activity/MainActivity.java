@@ -8,10 +8,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
 import com.cookandroid.practice1.adapter.ItemDealAdapter;
-import com.cookandroid.practice1.api.MyApiClient;
+import com.cookandroid.practice1.api.HomeMainApiClient;
 import com.cookandroid.practice1.entity.HomeMainApiResponse;
-import com.cookandroid.practice1.entity.HomeMainGroup;
-import com.cookandroid.practice1.entity.Item;
 import com.cookandroid.practice1.entity.ItemDeal;
 import com.google.gson.Gson;
 
@@ -78,30 +76,20 @@ public class MainActivity extends AppCompatActivity {
         // 또, Main Thread에서 네트워크작업도 제한됨..5초 이상의 지연이 있을 경우 App 종료..
         // 따라서 별도의 Thread를 구성하고 네트워크 작업을 해야하는데 매번 이러긴 귀찮으니
         // Volley라는 패키지를 사용해서 손 쉽게 API를 호출하고 response 후에 UI 작업까지 할 수 있음.
-        new MyApiClient().getMobileHome(
+        new HomeMainApiClient().getMobileHome(
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            Gson gson = new Gson();
-                            HomeMainApiResponse homeMainResponse = gson.fromJson(response, HomeMainApiResponse.class);
-
-                            for (HomeMainGroup homeMainGroup: homeMainResponse.Data.HomeMainGroupList
-                                 ) {
-                                if (homeMainGroup.Type == 3){
-                                    for (Item item: homeMainGroup.ItemList
-                                         ) {
-                                        deals.add(new ItemDeal(item.ImageUrl, item.ItemTitle));
-                                    }
-                                }
-                            }
+                            processMobileHomeResponse(response);
 
                             adapter.notifyDataSetChanged();
-
-                            mobileHomeSwipeRefreshLayout.setRefreshing(false);
                         }
                         catch (Exception e){
                             e.printStackTrace();
+                        }
+                        finally {
+                            mobileHomeSwipeRefreshLayout.setRefreshing(false);
                         }
                     }
                 },
@@ -112,6 +100,20 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    private void processMobileHomeResponse(String response) {
+        Gson gson = new Gson();
+        HomeMainApiResponse homeMainResponse = gson.fromJson(response, HomeMainApiResponse.class);
+
+        for (HomeMainApiResponse.HomeMainGroup homeMainGroup
+                : homeMainResponse.Data.HomeMainGroupList) {
+            if (homeMainGroup.Type == 3){
+                for (HomeMainApiResponse.Item item: homeMainGroup.ItemList) {
+                    deals.add(new ItemDeal(item.ImageUrl, item.ItemTitle));
+                }
+            }
+        }
     }
 
     private void setMobileHomeSwipeRefreshLayout() {

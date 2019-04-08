@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyApiClient {
+public class HomeMainApiClient {
     private String urlPrefix = "";
 
     public void getMobileHome(Response.Listener<String> responseListener, Response.ErrorListener errorListener)
@@ -29,7 +29,6 @@ public class MyApiClient {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "");
                 return params;
             }
         };
