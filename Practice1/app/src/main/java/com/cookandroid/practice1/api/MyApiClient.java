@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeMainApiClient {
+public class MyApiClient {
     public void setMainActivityList(Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener)
     {
         String url = "";

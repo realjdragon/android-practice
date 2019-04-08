@@ -12,7 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
 import com.cookandroid.practice1.adapter.ItemDealAdapter;
-import com.cookandroid.practice1.api.HomeMainApiClient;
+import com.cookandroid.practice1.api.MyApiClient;
 import com.cookandroid.practice1.entity.ItemDeal;
 
 import org.json.JSONArray;
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         // 또, Main Thread에서 네트워크작업도 제한됨..5초 이상의 지연이 있을 경우 App 종료..
         // 따라서 별도의 Thread를 구성하고 네트워크 작업을 해야하는데 매번 이러긴 귀찮으니
         // Volley라는 패키지를 사용해서 손 쉽게 API를 호출하고 response 후에 UI 작업까지 할 수 있음.
-        new HomeMainApiClient().setMainActivityList(
+        new MyApiClient().setMainActivityList(
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

@@ -29,6 +29,18 @@ public class ItemDealAdapter extends BaseAdapter {
         this.inflater = inflater;
     }
 
+    // View 형태의 가짓수 (홀수, 짝수 두 가지)
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    // 홀수, 짝수 구분
+    @Override
+    public int getItemViewType(int position) {
+        return position % 2;
+    }
+
     // ItemDealAdapter 객체가 만들어낼 View의 개수를 리턴하는 메소드
     @Override
     public int getCount() {
@@ -55,6 +67,13 @@ public class ItemDealAdapter extends BaseAdapter {
     // parent : 이 Adapter 객체가 설정된 AdapterView객체(여기서는 ListView)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        int layoutResource = 0;
+        if (getItemViewType(position) == 0) {
+            layoutResource = R.layout.item_deal_list_row_odd;
+        } else {
+            layoutResource = R.layout.item_deal_list_row_even;
+        }
+
         // 크게 getView의 안에서는 2가지 작업이 이루어짐.
         // 1. ListView의 목록 하나의 모양을 담당하는 View 객체를 만들어 내는 'New View'
         // 2. 만들어진 View에 해당 Data를 연결하는 'Bind View'
@@ -64,7 +83,7 @@ public class ItemDealAdapter extends BaseAdapter {
         // 근데 그건 RecyclerView의 특징인줄 알았다만...
         if(convertView == null) {
             // null이라면 재활용할 View가 없으므로 새로운 객체 생성
-            convertView = inflater.inflate(R.layout.item_deal_list_row, null);
+            convertView = inflater.inflate(layoutResource, null);
         }
 
         // 2. Bind View
