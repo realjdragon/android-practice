@@ -1,12 +1,8 @@
 package com.cookandroid.practice1.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,6 +16,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 // Activity는 화면을 구성하는 가장 기본적인 컴포넌트
 // 모든 Activity는 Activity 클래스를 상속받음
@@ -55,20 +53,10 @@ public class MainActivity extends AppCompatActivity {
         // AdapterView는 ViewGroup에서 파생되는 클래스임.
         // 다수의 항목을 열거할 때 사용하는 뷰들을 총칭하여 AdapterView라고 함!
         // AdapterView라고 부르는 이유는 UI에 표시할 항목을 adapter라는 객체에서 공급받기 때문
-        ListView listView = (ListView)findViewById(R.id.itemDealList);
+        ListView listView = (ListView)findViewById(R.id.item_deal_list);
 
         // 위에 만든 Adapter 객체를 ListView에 설정.
         listView.setAdapter(adapter);
-
-        // 아이템을 클릭했을 때 토스트
-        // 이런 식으로 한 개의 View 객체에 접근할 수 있으므로 사용자와 상호작용 가능
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), deals.get(i).getName(),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
 
         // API 호출해서 ListView Set
         // 안드로이드는 안정성의 이유로 Main Thread (UI Thread)에서만 UI를 변경할 수 있도록 제한됨

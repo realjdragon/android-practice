@@ -15,9 +15,14 @@
         android:gravity="center"
         android:background="#dddddd"/>
 
-    <ListView
-        android:id="@+id/itemDealList"
+        android:id="@+id/home_main_swipe_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@+id/item_deal_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+
 </LinearLayout>
