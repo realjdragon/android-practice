@@ -9,11 +9,11 @@ import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
 import com.cookandroid.practice1.adapter.ItemDealAdapter;
 import com.cookandroid.practice1.api.MyApiClient;
+import com.cookandroid.practice1.entity.HomeMainApiResponse;
+import com.cookandroid.practice1.entity.HomeMainGroup;
+import com.cookandroid.practice1.entity.Item;
 import com.cookandroid.practice1.entity.ItemDeal;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -24,10 +24,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 // 모든 Activity는 Activity 클래스를 상속받음
 // AppCompatActivity는 안드로이드 하위 버전을 지원하는 액티비티
 public class MainActivity extends AppCompatActivity {
+    // 리스트뷰
     ListView itemListView;
 
+    // 스와이프 레이아웃
     SwipeRefreshLayout mobileHomeSwipeRefreshLayout;
 
+    // 상품 리스트
     ArrayList<ItemDeal> deals;
 
     // ItemDeal 객체의 정보들(이미지, 상품명)를 적절하게 보여줄 뷰로 만들어주는 Adapter클래스 객체생성
@@ -68,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         // API 호출해서 ListView Set
         setMobileHome();
-
     }
 
     private void setMobileHome() {
@@ -77,20 +79,19 @@ public class MainActivity extends AppCompatActivity {
         // 따라서 별도의 Thread를 구성하고 네트워크 작업을 해야하는데 매번 이러긴 귀찮으니
         // Volley라는 패키지를 사용해서 손 쉽게 API를 호출하고 response 후에 UI 작업까지 할 수 있음.
         new MyApiClient().getMobileHome(
-                new Response.Listener<JSONObject>() {
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(String response) {
                         try {
-                            JSONObject data = response.getJSONObject("Data");
-                            JSONArray homeMainGroupList = data.getJSONArray("HomeMainGroupList");
-                            JSONArray itemList = new JSONArray();
-                            for (int i=0; i < homeMainGroupList.length(); i++) {
-                                if (homeMainGroupList.getJSONObject(i).getInt("Type") == 3){
-                                    itemList = homeMainGroupList.getJSONObject(i).getJSONArray("ItemList");
+                            Gson gson = new Gson();
+                            HomeMainApiResponse homeMainResponse = gson.fromJson(response, HomeMainApiResponse.class);
 
-                                    for (int j=0; j < itemList.length(); j++) {
-                                        deals.add(new ItemDeal(itemList.getJSONObject(j).getString("ImageUrl")
-                                                , itemList.getJSONObject(j).getString("ItemTitle")));
+                            for (HomeMainGroup homeMainGroup: homeMainResponse.Data.HomeMainGroupList
+                                 ) {
+                                if (homeMainGroup.Type == 3){
+                                    for (Item item: homeMainGroup.ItemList
+                                         ) {
+                                        deals.add(new ItemDeal(item.ImageUrl, item.ItemTitle));
                                     }
                                 }
                             }
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
                             mobileHomeSwipeRefreshLayout.setRefreshing(false);
                         }
-                        catch (JSONException e){
+                        catch (Exception e){
                             e.printStackTrace();
                         }
                     }
