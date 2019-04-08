@@ -43,13 +43,12 @@ public class HomeMainApiClient {
                             for (int i=0; i < homeMainGroupList.length(); i++) {
                                 if (homeMainGroupList.getJSONObject(i).getInt("Type") == 3){
                                     itemList = homeMainGroupList.getJSONObject(i).getJSONArray("ItemList");
-                                    break;
-                                }
-                            }
 
-                            for (int i=0; i < itemList.length(); i++) {
-                                deals.add(new ItemDeal(itemList.getJSONObject(i).getString("ImageUrl")
-                                        , itemList.getJSONObject(i).getString("ItemTitle")));
+                                    for (int i=0; i < itemList.length(); i++) {
+                                        deals.add(new ItemDeal(itemList.getJSONObject(i).getString("ImageUrl")
+                                                , itemList.getJSONObject(i).getString("ItemTitle")));
+                                    }
+                                }
                             }
 
                             // AdapterView는 ViewGroup에서 파생되는 클래스임.

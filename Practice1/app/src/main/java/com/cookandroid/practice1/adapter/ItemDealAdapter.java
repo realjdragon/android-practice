@@ -32,7 +32,7 @@ public class ItemDealAdapter extends BaseAdapter {
     // ItemDealAdapter 객체가 만들어낼 View의 개수를 리턴하는 메소드
     @Override
     public int getCount() {
-        return deals.size() > 15 ? 15 : deals.size();
+        return deals.size();
     }
 
     // ListView의 특정 위치(position)에 해당하는 Data를 리턴하는 메소드
