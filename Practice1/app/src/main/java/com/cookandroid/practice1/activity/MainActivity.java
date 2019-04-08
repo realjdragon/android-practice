@@ -18,11 +18,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 // Activity는 화면을 구성하는 가장 기본적인 컴포넌트
 // 모든 Activity는 Activity 클래스를 상속받음
 // AppCompatActivity는 안드로이드 하위 버전을 지원하는 액티비티
 public class MainActivity extends AppCompatActivity {
+    ListView itemListView;
+
+    SwipeRefreshLayout homeMainSwipeRefreshLayout;
+
     ArrayList<ItemDeal> deals;
 
     // ItemDeal 객체의 정보들(이미지, 상품명)를 적절하게 보여줄 뷰로 만들어주는 Adapter클래스 객체생성
@@ -53,17 +58,31 @@ public class MainActivity extends AppCompatActivity {
         // AdapterView는 ViewGroup에서 파생되는 클래스임.
         // 다수의 항목을 열거할 때 사용하는 뷰들을 총칭하여 AdapterView라고 함!
         // AdapterView라고 부르는 이유는 UI에 표시할 항목을 adapter라는 객체에서 공급받기 때문
-        ListView listView = (ListView)findViewById(R.id.item_deal_list);
+        itemListView = (ListView)findViewById(R.id.item_deal_list);
 
         // 위에 만든 Adapter 객체를 ListView에 설정.
-        listView.setAdapter(adapter);
+        itemListView.setAdapter(adapter);
+
+        // 스와이프 새로고침 설정
+        homeMainSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.home_main_swipe_layout);
+        homeMainSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                setMobileHome();
+            }
+        });
 
         // API 호출해서 ListView Set
+        setMobileHome();
+
+    }
+
+    private void setMobileHome() {
         // 안드로이드는 안정성의 이유로 Main Thread (UI Thread)에서만 UI를 변경할 수 있도록 제한됨
         // 또, Main Thread에서 네트워크작업도 제한됨..5초 이상의 지연이 있을 경우 App 종료..
         // 따라서 별도의 Thread를 구성하고 네트워크 작업을 해야하는데 매번 이러긴 귀찮으니
         // Volley라는 패키지를 사용해서 손 쉽게 API를 호출하고 response 후에 UI 작업까지 할 수 있음.
-        new MyApiClient().setMainActivityList(
+        new MyApiClient().getMobileHome(
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -83,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             adapter.notifyDataSetChanged();
+
+                            homeMainSwipeRefreshLayout.setRefreshing(false);
                         }
                         catch (JSONException e){
                             e.printStackTrace();
