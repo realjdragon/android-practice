@@ -1,23 +1,53 @@
 package com.cookandroid.practice1.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class HomeMainApiResponse extends ApiResponse {
-    public Data Data;
+    @SerializedName("Data")
+    private Data data;
+
+    public Data getData() {
+        return data;
+    }
 
     public class Data {
-        public ArrayList<HomeMainGroup> HomeMainGroupList;
+        @SerializedName("HomeMainGroupList")
+        private ArrayList<HomeMainGroup> homeMainGroupList;
+
+        public ArrayList<HomeMainGroup> getHomeMainGroupList() {
+            return homeMainGroupList;
+        }
     }
 
     public class HomeMainGroup {
-        public int Type;
+        @SerializedName("Type")
+        private int type;
+        @SerializedName("ItemList")
+        private ArrayList<Item> itemList;
 
-        public ArrayList<Item> ItemList;
+        public int getType() {
+            return type;
+        }
+
+        public ArrayList<Item> getItemList() {
+            return itemList;
+        }
     }
 
     public class Item {
-        public String ItemTitle;
+        @SerializedName("ItemTitle")
+        private String itemTitle;
+        @SerializedName("ImageUrl")
+        private String imageUrl;
 
-        public String ImageUrl;
+        public String getItemTitle() {
+            return itemTitle;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
     }
 }

@@ -1,11 +1,26 @@
 package com.cookandroid.practice1.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ApiResponse {
-    public String ServerTime;
+    @SerializedName("ServerTime")
+    private String serverTime;
+    @SerializedName("ResultCode")
+    private int resultCode;
+    @SerializedName("Message")
+    private String message;
 
-    public int ResultCode;
+    public String getServerTime() {
+        return serverTime;
+    }
 
-    public String Message;
+    public int getResultCode() {
+        return resultCode;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }
 
 

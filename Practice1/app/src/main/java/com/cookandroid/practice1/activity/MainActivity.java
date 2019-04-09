@@ -117,12 +117,13 @@ public class MainActivity extends AppCompatActivity {
     private void processMobileHomeResponse(HomeMainApiResponse response) {
         deals.clear();
 
-        ArrayList<HomeMainApiResponse.HomeMainGroup> homeMainGroups = response.Data.HomeMainGroupList;
+        ArrayList<HomeMainApiResponse.HomeMainGroup> homeMainGroups
+                = response.getData().getHomeMainGroupList();
         if (homeMainGroups != null && homeMainGroups.size() > 0) {
             for (HomeMainApiResponse.HomeMainGroup homeMainGroup : homeMainGroups) {
-                if (homeMainGroup.Type == 3) {
-                    for (HomeMainApiResponse.Item item: homeMainGroup.ItemList) {
-                        deals.add(new ItemDeal(item.ImageUrl, item.ItemTitle));
+                if (homeMainGroup.getType() == 3) {
+                    for (HomeMainApiResponse.Item item: homeMainGroup.getItemList()) {
+                        deals.add(new ItemDeal(item.getImageUrl(), item.getItemTitle()));
                     }
                 }
             }

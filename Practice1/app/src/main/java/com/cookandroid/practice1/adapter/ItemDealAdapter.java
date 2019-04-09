@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.cookandroid.practice1.entity.ItemDeal;
 import com.cookandroid.practice1.R;
+import com.cookandroid.practice1.entity.ItemDeal;
 
 import java.util.ArrayList;
 
@@ -17,6 +17,30 @@ import java.util.ArrayList;
 // BaseAdatper를 상속받음
 // getCount, getItem, getItemId 이 세가지는 BaseAdatper에도 구현이 안 되어 있으니 직접 구현해야함.
 public class ItemDealAdapter extends BaseAdapter {
+    int cntNew = 0;
+    int cntOld = 0;
+
+    private class ViewHolder {
+        View mConvertView;
+
+        ImageView mImageView;
+
+        TextView mTextView;
+
+        public ViewHolder(int type) {
+            switch (type) {
+                case 0:
+                    mConvertView = inflater.inflate(R.layout.item_deal_list_row_odd, null);
+                    break;
+                case 1:
+                    mConvertView = inflater.inflate(R.layout.item_deal_list_row_even, null);
+                    break;
+            }
+        }
+    }
+
+    ViewHolder viewHolder;
+
     ArrayList<ItemDeal> deals;
 
     LayoutInflater inflater;
@@ -67,38 +91,31 @@ public class ItemDealAdapter extends BaseAdapter {
     // parent : 이 Adapter 객체가 설정된 AdapterView객체(여기서는 ListView)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        int layoutResource = 0;
-        if (getItemViewType(position) == 0) {
-            layoutResource = R.layout.item_deal_list_row_odd;
-        } else {
-            layoutResource = R.layout.item_deal_list_row_even;
-        }
-
-        // 크게 getView의 안에서는 2가지 작업이 이루어짐.
-        // 1. ListView의 목록 하나의 모양을 담당하는 View 객체를 만들어 내는 'New View'
-        // 2. 만들어진 View에 해당 Data를 연결하는 'Bind View'
-
-        // 1.New View
-        // convertView가 null이 아니라면 재활용할 수 있다고함.
-        // 근데 그건 RecyclerView의 특징인줄 알았다만...
         if(convertView == null) {
-            // null이라면 재활용할 View가 없으므로 새로운 객체 생성
-            convertView = inflater.inflate(layoutResource, null);
+            // 처음에만 생성
+            viewHolder = new ViewHolder(getItemViewType(position));
+
+            convertView = viewHolder.mConvertView;
+
+            viewHolder.mImageView = (ImageView)convertView.findViewById(R.id.item_image);
+            viewHolder.mTextView = (TextView)convertView.findViewById(R.id.item_name);
+
+            convertView.setTag(viewHolder);
+
+            ++cntNew;
+        }
+        else {
+            viewHolder = (ViewHolder) convertView.getTag();
+
+            ++cntOld;
         }
 
-        // 2. Bind View
-        // 재활용을 하든 새로 만들었든 이제 converView는 View객체 상태임.
-        // 이 convertView로부터 데이터를 입력할 위젯들 참조하기.
-        TextView itemNameView = (TextView)convertView.findViewById(R.id.item_name);
-        ImageView itemImageView = (ImageView)convertView.findViewById(R.id.item_image);
+        viewHolder.mTextView.setText(String.valueOf(cntNew) + " "
+                + String.valueOf(cntOld) + " "
+                + deals.get(position).getName());
 
-        // position을 이용해 해당하는 item 찾기
-        itemNameView.setText(deals.get(position).getName());
+        Glide.with(parent).load(deals.get(position).getImgUrl()).into(viewHolder.mImageView);
 
-        // drawable 리소스에 있는 이미지 말고 url을 로드를 위해 glide 사용
-        Glide.with(parent).load(deals.get(position).getImgUrl()).into(itemImageView);
-
-        //설정이 끝난 convertView객체 리턴
         return convertView;
     }
 }
