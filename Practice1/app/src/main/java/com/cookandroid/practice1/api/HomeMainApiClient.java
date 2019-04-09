@@ -2,7 +2,7 @@ package com.cookandroid.practice1.api;
 
 import com.android.volley.Response;
 import com.cookandroid.practice1.MyApplication;
-import com.cookandroid.practice1.entity.HomeMainApiResponse;
+import com.cookandroid.practice1.entity.home.HomeMainApiResponse;
 
 import java.util.HashMap;
 import java.util.Map;

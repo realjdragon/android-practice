@@ -10,9 +10,8 @@ import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
 import com.cookandroid.practice1.adapter.ItemDealAdapter;
 import com.cookandroid.practice1.api.HomeMainApiClient;
-import com.cookandroid.practice1.entity.HomeMainApiResponse;
+import com.cookandroid.practice1.entity.home.HomeMainApiResponse;
 import com.cookandroid.practice1.entity.ItemDeal;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 

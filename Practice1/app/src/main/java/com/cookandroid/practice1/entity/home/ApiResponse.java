@@ -1,4 +1,4 @@
-package com.cookandroid.practice1.entity;
+package com.cookandroid.practice1.entity.home;
 
 import com.google.gson.annotations.SerializedName;
 
