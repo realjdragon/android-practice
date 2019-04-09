@@ -108,10 +108,13 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         HomeMainApiResponse res = gson.fromJson(response, HomeMainApiResponse.class);
 
-        for (HomeMainApiResponse.HomeMainGroup homeMainGroup : res.Data.HomeMainGroupList) {
-            if (homeMainGroup.Type == 3) {
-                for (HomeMainApiResponse.Item item: homeMainGroup.ItemList) {
-                    deals.add(new ItemDeal(item.ImageUrl, item.ItemTitle));
+        ArrayList<HomeMainApiResponse.HomeMainGroup> homeMainGroups = res.Data.HomeMainGroupList;
+        if (homeMainGroups != null && homeMainGroups.size() > 0) {
+            for (HomeMainApiResponse.HomeMainGroup homeMainGroup : homeMainGroups) {
+                if (homeMainGroup.Type == 3) {
+                    for (HomeMainApiResponse.Item item: homeMainGroup.ItemList) {
+                        deals.add(new ItemDeal(item.ImageUrl, item.ItemTitle));
+                    }
                 }
             }
         }
