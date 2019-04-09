@@ -3,6 +3,7 @@ package com.cookandroid.practice1.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -88,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                         finally {
                             mobileHomeSwipeRefreshLayout.setRefreshing(false);
+
+                            Toast.makeText(MainActivity.this
+                                    , String.valueOf(deals.size()) + "개 상품 load"
+                                    , Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
