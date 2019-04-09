@@ -82,8 +82,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             processMobileHomeResponse(response);
-
-                            adapter.notifyDataSetChanged();
                         }
                         catch (Exception e){
                             e.printStackTrace();
@@ -97,23 +95,28 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("VOLLEY", error.getMessage());
+
+                        mobileHomeSwipeRefreshLayout.setRefreshing(false);
                     }
                 }
         );
     }
 
     private void processMobileHomeResponse(String response) {
-        Gson gson = new Gson();
-        HomeMainApiResponse homeMainResponse = gson.fromJson(response, HomeMainApiResponse.class);
+        deals.clear();
 
-        for (HomeMainApiResponse.HomeMainGroup homeMainGroup
-                : homeMainResponse.Data.HomeMainGroupList) {
-            if (homeMainGroup.Type == 3){
+        Gson gson = new Gson();
+        HomeMainApiResponse res = gson.fromJson(response, HomeMainApiResponse.class);
+
+        for (HomeMainApiResponse.HomeMainGroup homeMainGroup : res.Data.HomeMainGroupList) {
+            if (homeMainGroup.Type == 3) {
                 for (HomeMainApiResponse.Item item: homeMainGroup.ItemList) {
                     deals.add(new ItemDeal(item.ImageUrl, item.ItemTitle));
                 }
             }
         }
+
+        adapter.notifyDataSetChanged();
     }
 
     private void setMobileHomeSwipeRefreshLayout() {
