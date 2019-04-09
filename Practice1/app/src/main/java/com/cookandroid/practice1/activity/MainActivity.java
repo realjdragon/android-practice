@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
         // 따라서 별도의 Thread를 구성하고 네트워크 작업을 해야하는데 매번 이러긴 귀찮으니
         // Volley라는 패키지를 사용해서 손 쉽게 API를 호출하고 response 후에 UI 작업까지 할 수 있음.
         new HomeMainApiClient().getMobileHome(
-                new Response.Listener<String>() {
+                new Response.Listener<HomeMainApiResponse>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(HomeMainApiResponse response) {
                         try {
                             processMobileHomeResponse(response);
                         }
@@ -114,13 +114,10 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    private void processMobileHomeResponse(String response) {
+    private void processMobileHomeResponse(HomeMainApiResponse response) {
         deals.clear();
 
-        Gson gson = new Gson();
-        HomeMainApiResponse res = gson.fromJson(response, HomeMainApiResponse.class);
-
-        ArrayList<HomeMainApiResponse.HomeMainGroup> homeMainGroups = res.Data.HomeMainGroupList;
+        ArrayList<HomeMainApiResponse.HomeMainGroup> homeMainGroups = response.Data.HomeMainGroupList;
         if (homeMainGroups != null && homeMainGroups.size() > 0) {
             for (HomeMainApiResponse.HomeMainGroup homeMainGroup : homeMainGroups) {
                 if (homeMainGroup.Type == 3) {
