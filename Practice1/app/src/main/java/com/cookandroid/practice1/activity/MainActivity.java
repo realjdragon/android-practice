@@ -72,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
         setMobileHome();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
+    }
+
     private void setMobileHome() {
         // 안드로이드는 안정성의 이유로 Main Thread (UI Thread)에서만 UI를 변경할 수 있도록 제한됨
         // 또, Main Thread에서 네트워크작업도 제한됨..5초 이상의 지연이 있을 경우 App 종료..
