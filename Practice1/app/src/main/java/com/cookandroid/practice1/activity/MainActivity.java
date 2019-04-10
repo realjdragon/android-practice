@@ -1,13 +1,12 @@
 package com.cookandroid.practice1.activity;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.cookandroid.practice1.R;
-import com.cookandroid.practice1.fragment.HomeMainFragment;
+import com.cookandroid.practice1.adapter.ViewPagerAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -16,17 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle(R.string.main_title);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        HomeMainFragment homeMainFragment = new HomeMainFragment();
-        fragmentTransaction.add(R.id.fragment_holder, homeMainFragment);
-        fragmentTransaction.commit();
-
-//        ViewPager viewPager = findViewById(R.id.view_pager);
-//        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
-
-//        TabLayout tabLayout = findViewById(R.id.tab_layout);
-//        tabLayout.setUpWithViewPager(viewPager);
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
     }
 }
