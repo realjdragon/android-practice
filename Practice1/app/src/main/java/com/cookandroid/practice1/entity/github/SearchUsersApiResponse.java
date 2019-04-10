@@ -9,7 +9,7 @@ public class SearchUsersApiResponse {
     private long totalCount;
     @SerializedName("incomplete_results")
     private boolean incompleteResults;
-    @SerializedName("Items")
+    @SerializedName("items")
     private ArrayList<User> users;
 
     public long getTotalCount() {

@@ -132,5 +132,4 @@ public class HomeMainFragment extends Fragment {
             }
         });
     }
-
 }
