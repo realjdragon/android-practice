@@ -13,7 +13,7 @@ public abstract class EndlessScrollListener implements AbsListView.OnScrollListe
     // True if we are still waiting for the last set of data to load.
     private boolean loading = true;
     // Sets the starting page index
-    private int startingPageIndex = 1;
+    private int startingPageIndex = 2;
 
     public EndlessScrollListener() {
     }
