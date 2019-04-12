@@ -23,9 +23,6 @@ import java.util.ArrayList;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class GitHubUsersFragment extends Fragment {
     // 리스트뷰
     ListView itemListView;
@@ -60,14 +57,12 @@ public class GitHubUsersFragment extends Fragment {
         itemListView = (ListView)rootView.findViewById(R.id.item_deal_list);
 
         // Attach the listener to the AdapterView onCreate
-        itemListView.setOnScrollListener(new EndlessScrollListener() {
+        itemListView.setOnScrollListener(new EndlessScrollListener(7, 2) {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
-                // Triggered only when new data needs to be appended to the list
-                // Add whatever code is needed to append new items to your AdapterView
                 setMobileHome(page);
-                // or loadNextDataFromApi(totalItemsCount);
-                return true; // ONLY if more data is actually being loaded; false otherwise.
+
+                return true;
             }
         });
 
@@ -137,6 +132,7 @@ public class GitHubUsersFragment extends Fragment {
         githubSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                deals.clear();
                 setMobileHome(1);
             }
         });

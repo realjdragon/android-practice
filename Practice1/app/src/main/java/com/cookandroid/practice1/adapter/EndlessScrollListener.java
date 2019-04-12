@@ -3,17 +3,16 @@ package com.cookandroid.practice1.adapter;
 import android.widget.AbsListView;
 
 public abstract class EndlessScrollListener implements AbsListView.OnScrollListener {
-    // The minimum number of items to have below your current scroll position
-    // before loading more.
+    // 보이는 화면 아래에 적어도 이 정도는 뷰가 살아있어야 한다.
     private int visibleThreshold = 5;
-    // The current offset index of data you have loaded
+    // 현재 페이지
     private int currentPage = 0;
-    // The total number of items in the dataset after the last load
+    // 가장 최근까지 총 아이템 수
     private int previousTotalItemCount = 0;
-    // True if we are still waiting for the last set of data to load.
+    // 로딩중이라면 true
     private boolean loading = true;
-    // Sets the starting page index
-    private int startingPageIndex = 2;
+    // 기본 시작 페이지
+    private int startingPageIndex = 1;
 
     public EndlessScrollListener() {
     }
@@ -27,7 +26,6 @@ public abstract class EndlessScrollListener implements AbsListView.OnScrollListe
         this.startingPageIndex = startPage;
         this.currentPage = startPage;
     }
-
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)

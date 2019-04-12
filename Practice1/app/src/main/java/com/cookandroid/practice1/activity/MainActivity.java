@@ -3,7 +3,7 @@ package com.cookandroid.practice1.activity;
 import android.os.Bundle;
 
 import com.cookandroid.practice1.R;
-import com.cookandroid.practice1.adapter.ViewPagerAdapter;
+import com.cookandroid.practice1.adapter.MainViewPagerAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -16,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
         setTitle(R.string.main_title);
 
         ViewPager viewPager = findViewById(R.id.main_view_pager);
-        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+        viewPager.setAdapter(new MainViewPagerAdapter(getSupportFragmentManager()));
     }
 }
