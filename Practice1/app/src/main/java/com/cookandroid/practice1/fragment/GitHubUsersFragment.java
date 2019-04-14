@@ -57,7 +57,7 @@ public class GitHubUsersFragment extends Fragment {
         itemListView = (ListView)rootView.findViewById(R.id.item_deal_list);
 
         // Attach the listener to the AdapterView onCreate
-        itemListView.setOnScrollListener(new EndlessScrollListener(7, 2) {
+        itemListView.setOnScrollListener(new EndlessScrollListener(10, 2) {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
                 setMobileHome(page);
