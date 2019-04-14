@@ -11,6 +11,7 @@ import com.cookandroid.practice1.R;
 import com.cookandroid.practice1.cell.base.BaseListCell;
 import com.cookandroid.practice1.entity.data.ItemInfo;
 
+// 아이템 리스트뷰 짝수줄 cell
 public class ItemEvenCell extends BaseListCell<ItemInfo> {
     View view;
 

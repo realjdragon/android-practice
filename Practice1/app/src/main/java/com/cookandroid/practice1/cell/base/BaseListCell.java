@@ -35,15 +35,6 @@ public abstract class BaseListCell<T> extends FrameLayout {
         return null;
     }
 
-    // 나중에 필요할 듯 하니 남겨둠..
-    protected void addOnListCellClickItem(View v) {
-        if ( getAdapter().getOnListCellClickDelegate() != null ) {
-            v.setOnClickListener(onListCellClickDelegateListener);
-        } else {
-            throw new IllegalStateException("ListAdapter 에서 OnListCellClickDelegate 를 설정한 후에 사용할 수 있습니다.");
-        }
-    }
-
     public void initializeView(Context context) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View cellView = onCreateView(context, inflater);
@@ -66,15 +57,6 @@ public abstract class BaseListCell<T> extends FrameLayout {
     public T getData() {
         return this.data;
     }
-
-    private View.OnClickListener onListCellClickDelegateListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if ( getAdapter().getOnListCellClickDelegate() != null ) {
-                getAdapter().getOnListCellClickDelegate().onClick(v, BaseListCell.this);
-            }
-        }
-    };
 
     public void setPosition(int position) {
         this.position = position;

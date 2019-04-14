@@ -15,11 +15,6 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
     private ArrayList<Class> mItemObjectList = null;
     private HashMap<Integer, Class> mItemViewMap = null;
     private Context mContext = null;
-    private OnListCellClickDelegate mOnListCellClickDelegate = null;
-
-    public static interface OnListCellClickDelegate {
-        public void onClick(View v, BaseListCell parent);
-    }
 
     public BaseListAdapter(Context context) {
         this.mContext = context;
@@ -37,15 +32,6 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
     @Override
     public T getItem(int position) {
         return mDataList == null ? null : mDataList.get(position);
-    }
-
-    // 나중에 필요할 듯 하니 남겨둠..
-    public void setOnListCellClickDelegate(OnListCellClickDelegate onClickDelegate) {
-        this.mOnListCellClickDelegate = onClickDelegate;
-    }
-
-    public OnListCellClickDelegate getOnListCellClickDelegate() {
-        return this.mOnListCellClickDelegate;
     }
 
     public void setDataList(ArrayList<T> dataList) {
