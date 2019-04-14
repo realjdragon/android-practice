@@ -13,9 +13,6 @@ public class ItemListAdapter extends BaseListAdapter<ItemInfo> {
     public static final int ITEM_ODD_ROW = 0;
     public static final int ITEM_EVEN_ROW = 1;
 
-    private int oldPos;
-    private boolean scrollDown;
-
     public ItemListAdapter(Context context) {
         super(context);
     }
