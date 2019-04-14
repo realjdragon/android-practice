@@ -1,4 +1,4 @@
-package com.cookandroid.practice1.adapter;
+package com.cookandroid.practice1.adapter.base;
 
 import android.widget.AbsListView;
 

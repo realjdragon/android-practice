@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
-import com.cookandroid.practice1.adapter.ItemDealAdapter;
+import com.cookandroid.practice1.adapter.item.ItemListAdapter;
 import com.cookandroid.practice1.api.HomeMainApiClient;
 import com.cookandroid.practice1.entity.ItemDeal;
 import com.cookandroid.practice1.entity.home.HomeMainApiResponse;
@@ -22,9 +22,6 @@ import java.util.ArrayList;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class HomeMainFragment extends Fragment {
     // 리스트뷰
     ListView itemListView;
@@ -38,7 +35,7 @@ public class HomeMainFragment extends Fragment {
     // ItemDeal 객체의 정보들(이미지, 상품명)를 적절하게 보여줄 뷰로 만들어주는 Adapter클래스 객체생성
     // 이 예제에서는 ItemDealAdapter.java 파일로 클래스를 설계하였음.
     // getLayoutInflater : xml 레이아웃 파일을 객체로 만들어 줌
-    ItemDealAdapter adapter;
+    ItemListAdapter adapter;
 
     View rootView;
 
@@ -51,7 +48,8 @@ public class HomeMainFragment extends Fragment {
 
         deals = new ArrayList<ItemDeal>();
 
-        adapter = new ItemDealAdapter(inflater, deals);
+        adapter = new ItemListAdapter(getContext());
+        adapter.setDataList(deals);
 
         // AdapterView는 ViewGroup에서 파생되는 클래스임.
         // 다수의 항목을 열거할 때 사용하는 뷰들을 총칭하여 AdapterView라고 함!

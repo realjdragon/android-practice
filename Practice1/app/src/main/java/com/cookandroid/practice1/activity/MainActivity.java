@@ -3,7 +3,7 @@ package com.cookandroid.practice1.activity;
 import android.os.Bundle;
 
 import com.cookandroid.practice1.R;
-import com.cookandroid.practice1.adapter.MainViewPagerAdapter;
+import com.cookandroid.practice1.adapter.viewpager.MainViewPagerAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;

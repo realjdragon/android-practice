@@ -1,4 +1,4 @@
-package com.cookandroid.practice1.adapter;
+package com.cookandroid.practice1.adapter.viewpager;
 
 import com.cookandroid.practice1.fragment.GitHubUsersFragment;
 import com.cookandroid.practice1.fragment.HomeMainFragment;
