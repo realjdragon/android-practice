@@ -1,4 +1,4 @@
-package com.cookandroid.practice1.entity.github;
+package com.cookandroid.practice1.entity.api.github;
 
 import com.google.gson.annotations.SerializedName;
 

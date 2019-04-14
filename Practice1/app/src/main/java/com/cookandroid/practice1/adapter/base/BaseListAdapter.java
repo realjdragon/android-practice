@@ -15,11 +15,11 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
     private ArrayList<Class> mItemObjectList = null;
     private HashMap<Integer, Class> mItemViewMap = null;
     private Context mContext = null;
-//    private OnListCellClickDelegate mOnListCellClickDelegate = null;
+    private OnListCellClickDelegate mOnListCellClickDelegate = null;
 
-//    public static interface OnListCellClickDelegate {
-//        public void onClick(View v, BaseListCell parent);
-//    }
+    public static interface OnListCellClickDelegate {
+        public void onClick(View v, BaseListCell parent);
+    }
 
     public BaseListAdapter(Context context) {
         this.mContext = context;
@@ -39,28 +39,15 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
         return mDataList == null ? null : mDataList.get(position);
     }
 
-    /**
-     * 이 메소드는 OnClickListener 이벤트를 Fragment 나 Activity 에 편하게 전달하기 위해 사용합니다.
-     * 작업 절차는 다음과 같습니다.
-     *
-     * 1. Fragment 나 Activity 에서 OnListCellClickDelegate 를 구현한후에 등록한다.
-     * 2. ListCell 에서 addOnListCellClickItem(View v) 메소드를 이용해 이벤트를 받고 싶은 뷰를 등록.
-     *
-     * @param onClickDelegate
-     */
-//    public void setOnListCellClickDelegate(OnListCellClickDelegate onClickDelegate) {
-//        this.mOnListCellClickDelegate = onClickDelegate;
-//    }
-//
-//    public OnListCellClickDelegate getOnListCellClickDelegate() {
-//        return this.mOnListCellClickDelegate;
-//    }
+    // 나중에 필요할 듯 하니 남겨둠..
+    public void setOnListCellClickDelegate(OnListCellClickDelegate onClickDelegate) {
+        this.mOnListCellClickDelegate = onClickDelegate;
+    }
 
-    /**
-     * 아이템 설정
-     *
-     * @param dataList
-     */
+    public OnListCellClickDelegate getOnListCellClickDelegate() {
+        return this.mOnListCellClickDelegate;
+    }
+
     public void setDataList(ArrayList<T> dataList) {
         this.mDataList = dataList;
         this.notifyDataSetChanged();

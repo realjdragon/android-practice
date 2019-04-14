@@ -35,18 +35,15 @@ public abstract class BaseListCell<T> extends FrameLayout {
         return null;
     }
 
-//    protected void addOnListCellClickItem(View v) {
-//        if ( getAdapter().getOnListCellClickDelegate() != null ) {
-//            v.setOnClickListener(onListCellClickDelegateListener);
-//        } else {
-//            throw new IllegalStateException("ListAdapter 에서 OnListCellClickDelegate 를 설정한 후에 사용할 수 있습니다.");
-//        }
-//    }
+    // 나중에 필요할 듯 하니 남겨둠..
+    protected void addOnListCellClickItem(View v) {
+        if ( getAdapter().getOnListCellClickDelegate() != null ) {
+            v.setOnClickListener(onListCellClickDelegateListener);
+        } else {
+            throw new IllegalStateException("ListAdapter 에서 OnListCellClickDelegate 를 설정한 후에 사용할 수 있습니다.");
+        }
+    }
 
-    /**
-     * 지정한 View 를 생성합니다.
-     * @param context
-     */
     public void initializeView(Context context) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View cellView = onCreateView(context, inflater);
@@ -55,18 +52,6 @@ public abstract class BaseListCell<T> extends FrameLayout {
         }
     }
 
-//    public View createView(Context context, T data) {
-//        initializeView(context);
-//        setData(data);
-//
-//        return this;
-//    }
-
-    /**
-     * View 를 생성하고, Holder 패턴을 인스턴스 변수로 지정하여 구현한다.
-     * @param context
-     * @return
-     */
     public abstract View onCreateView(Context context, LayoutInflater inflater);
 
     public void setData(T data, int position) {
@@ -82,14 +67,14 @@ public abstract class BaseListCell<T> extends FrameLayout {
         return this.data;
     }
 
-//    private View.OnClickListener onListCellClickDelegateListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            if ( getAdapter().getOnListCellClickDelegate() != null ) {
-//                getAdapter().getOnListCellClickDelegate().onClick(v, BaseListCell.this);
-//            }
-//        }
-//    };
+    private View.OnClickListener onListCellClickDelegateListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if ( getAdapter().getOnListCellClickDelegate() != null ) {
+                getAdapter().getOnListCellClickDelegate().onClick(v, BaseListCell.this);
+            }
+        }
+    };
 
     public void setPosition(int position) {
         this.position = position;

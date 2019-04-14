@@ -14,8 +14,8 @@ import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
 import com.cookandroid.practice1.adapter.item.ItemListAdapter;
 import com.cookandroid.practice1.api.HomeMainApiClient;
-import com.cookandroid.practice1.entity.ItemDeal;
-import com.cookandroid.practice1.entity.home.HomeMainApiResponse;
+import com.cookandroid.practice1.entity.data.ItemInfo;
+import com.cookandroid.practice1.entity.api.home.HomeMainApiResponse;
 
 import java.util.ArrayList;
 
@@ -30,11 +30,8 @@ public class HomeMainFragment extends Fragment {
     SwipeRefreshLayout mobileHomeSwipeRefreshLayout;
 
     // 상품 리스트
-    ArrayList<ItemDeal> deals;
+    ArrayList<ItemInfo> deals;
 
-    // ItemDeal 객체의 정보들(이미지, 상품명)를 적절하게 보여줄 뷰로 만들어주는 Adapter클래스 객체생성
-    // 이 예제에서는 ItemDealAdapter.java 파일로 클래스를 설계하였음.
-    // getLayoutInflater : xml 레이아웃 파일을 객체로 만들어 줌
     ItemListAdapter adapter;
 
     View rootView;
@@ -46,7 +43,7 @@ public class HomeMainFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_home_main, container, false);
 
-        deals = new ArrayList<ItemDeal>();
+        deals = new ArrayList<ItemInfo>();
 
         adapter = new ItemListAdapter(getContext());
         adapter.setDataList(deals);
@@ -112,7 +109,7 @@ public class HomeMainFragment extends Fragment {
             for (HomeMainApiResponse.HomeMainGroup homeMainGroup : homeMainGroups) {
                 if (homeMainGroup.getType() == 3) {
                     for (HomeMainApiResponse.Item item: homeMainGroup.getItemList()) {
-                        deals.add(new ItemDeal(item.getImageUrl(), item.getItemTitle()));
+                        deals.add(new ItemInfo(item.getImageUrl(), item.getItemTitle()));
                     }
                 }
             }

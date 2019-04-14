@@ -13,10 +13,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
 import com.cookandroid.practice1.adapter.base.EndlessScrollListener;
-import com.cookandroid.practice1.adapter.item.ItemDealAdapter;
+import com.cookandroid.practice1.adapter.item.ItemListAdapter;
 import com.cookandroid.practice1.api.GitHubApiClient;
-import com.cookandroid.practice1.entity.ItemDeal;
-import com.cookandroid.practice1.entity.github.SearchUsersApiResponse;
+import com.cookandroid.practice1.entity.data.ItemInfo;
+import com.cookandroid.practice1.entity.api.github.SearchUsersApiResponse;
 
 import java.util.ArrayList;
 
@@ -30,13 +30,10 @@ public class GitHubUsersFragment extends Fragment {
     // 스와이프 레이아웃
     SwipeRefreshLayout githubSwipeRefreshLayout;
 
-    // 상품 리스트
-    ArrayList<ItemDeal> deals;
+    // 유저 리스트
+    ArrayList<ItemInfo> users;
 
-    // ItemDeal 객체의 정보들(이미지, 상품명)를 적절하게 보여줄 뷰로 만들어주는 Adapter클래스 객체생성
-    // 이 예제에서는 ItemDealAdapter.java 파일로 클래스를 설계하였음.
-    // getLayoutInflater : xml 레이아웃 파일을 객체로 만들어 줌
-    ItemDealAdapter adapter;
+    ItemListAdapter adapter;
 
     View rootView;
 
@@ -47,16 +44,17 @@ public class GitHubUsersFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_git_hub_users, container, false);
 
-        deals = new ArrayList<ItemDeal>();
+        users = new ArrayList<ItemInfo>();
 
-        adapter = new ItemDealAdapter(inflater, deals);
+        adapter = new ItemListAdapter(getContext());
+        adapter.setDataList(users);
 
         // AdapterView는 ViewGroup에서 파생되는 클래스임.
         // 다수의 항목을 열거할 때 사용하는 뷰들을 총칭하여 AdapterView라고 함!
         // AdapterView라고 부르는 이유는 UI에 표시할 항목을 adapter라는 객체에서 공급받기 때문
         itemListView = (ListView)rootView.findViewById(R.id.item_deal_list);
 
-        // Attach the listener to the AdapterView onCreate
+        // 무한 스크롤
         itemListView.setOnScrollListener(new EndlessScrollListener(10, 2) {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
@@ -70,7 +68,7 @@ public class GitHubUsersFragment extends Fragment {
         itemListView.setAdapter(adapter);
 
         // 스와이프 새로고침 설정
-        setMobileHomeSwipeRefreshLayout();
+        setUsersSwipeRefreshLayout();
 
         // API 호출해서 ListView Set
         setMobileHome(1);
@@ -90,7 +88,7 @@ public class GitHubUsersFragment extends Fragment {
                     @Override
                     public void onResponse(SearchUsersApiResponse response) {
                         try {
-                            processMobileHomeResponse(response);
+                            processGetUsersResponse(response);
                         }
                         catch (Exception e){
                             e.printStackTrace();
@@ -99,7 +97,7 @@ public class GitHubUsersFragment extends Fragment {
                             githubSwipeRefreshLayout.setRefreshing(false);
 
                             Toast.makeText(getActivity()
-                                    , String.valueOf(deals.size()) + "개 회원 load"
+                                    , String.valueOf(users.size()) + "개 회원 load"
                                     , Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -115,24 +113,24 @@ public class GitHubUsersFragment extends Fragment {
         );
     }
 
-    private void processMobileHomeResponse(SearchUsersApiResponse response) {
+    private void processGetUsersResponse(SearchUsersApiResponse response) {
         ArrayList<SearchUsersApiResponse.User> users = response.getUsers();
 
         if (users != null && users.size() > 0) {
             for (SearchUsersApiResponse.User user : users) {
-                deals.add(new ItemDeal(user.getAvatarUrl(), user.getUrl()));
+                this.users.add(new ItemInfo(user.getAvatarUrl(), user.getUrl()));
             }
         }
 
         adapter.notifyDataSetChanged();
     }
 
-    private void setMobileHomeSwipeRefreshLayout() {
-        githubSwipeRefreshLayout = (SwipeRefreshLayout)rootView.findViewById(R.id.home_main_swipe_layout);
+    private void setUsersSwipeRefreshLayout() {
+        githubSwipeRefreshLayout = (SwipeRefreshLayout)rootView.findViewById(R.id.users_swipe_layout);
         githubSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                deals.clear();
+                users.clear();
                 setMobileHome(1);
             }
         });

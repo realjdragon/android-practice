@@ -1,14 +1,14 @@
-package com.cookandroid.practice1.entity;
+package com.cookandroid.practice1.entity.data;
 
 // 상품 딜
-public class ItemDeal {
+public class ItemInfo {
     // 상품 이미지 경로
     String imgUrl;
 
     // 상품명
     String name;
 
-    public ItemDeal(String imgUrl, String name) {
+    public ItemInfo(String imgUrl, String name) {
         this.imgUrl = imgUrl;
         this.name= name;
     }

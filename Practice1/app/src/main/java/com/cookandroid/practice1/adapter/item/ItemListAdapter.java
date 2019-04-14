@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import com.cookandroid.practice1.adapter.base.BaseListAdapter;
 import com.cookandroid.practice1.cell.item.ItemEvenCell;
 import com.cookandroid.practice1.cell.item.ItemOddCell;
-import com.cookandroid.practice1.entity.ItemDeal;
+import com.cookandroid.practice1.entity.data.ItemInfo;
 
-public class ItemListAdapter extends BaseListAdapter<ItemDeal> {
+public class ItemListAdapter extends BaseListAdapter<ItemInfo> {
     public static final int ITEM_ODD_ROW = 0;
     public static final int ITEM_EVEN_ROW = 1;
 

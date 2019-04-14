@@ -18,9 +18,9 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
         switch (position)
         {
             case 0:
-                return new HomeMainFragment(); //ChildFragment1 at position 0
+                return new HomeMainFragment();
             case 1:
-                return new GitHubUsersFragment(); //ChildFragment2 at position 1
+                return new GitHubUsersFragment();
         }
         return null;
     }
@@ -28,11 +28,5 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return 2;
-    }
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        String title = getItem(position).getClass().getName();
-        return title.subSequence(title.lastIndexOf(".") + 1, title.length());
     }
 }
