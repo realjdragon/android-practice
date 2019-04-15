@@ -2,10 +2,10 @@ package com.cookandroid.practice1.fragment;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,8 +23,8 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class HomeMainFragment extends Fragment {
-    // 리스트뷰
-    ListView itemListView;
+    // 그리드뷰
+    GridView itemGridView;
 
     // 스와이프 레이아웃
     SwipeRefreshLayout mobileHomeSwipeRefreshLayout;
@@ -51,10 +51,10 @@ public class HomeMainFragment extends Fragment {
         // AdapterView는 ViewGroup에서 파생되는 클래스임.
         // 다수의 항목을 열거할 때 사용하는 뷰들을 총칭하여 AdapterView라고 함!
         // AdapterView라고 부르는 이유는 UI에 표시할 항목을 adapter라는 객체에서 공급받기 때문
-        itemListView = (ListView)rootView.findViewById(R.id.item_deal_list);
+        itemGridView = (GridView) rootView.findViewById(R.id.item_deal_grid);
 
         // 위에 만든 Adapter 객체를 ListView에 설정.
-        itemListView.setAdapter(adapter);
+        itemGridView.setAdapter(adapter);
 
         // 스와이프 새로고침 설정
         setMobileHomeSwipeRefreshLayout();

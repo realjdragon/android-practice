@@ -55,7 +55,7 @@ public class GitHubUsersFragment extends Fragment {
         itemListView = (ListView)rootView.findViewById(R.id.item_deal_list);
 
         // 무한 스크롤
-        itemListView.setOnScrollListener(new EndlessScrollListener(10, 2) {
+        itemListView.setOnScrollListener(new EndlessScrollListener(3, 2) {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
                 setMobileHome(page);
