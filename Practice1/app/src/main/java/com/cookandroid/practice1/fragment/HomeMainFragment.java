@@ -81,6 +81,10 @@ public class HomeMainFragment extends Fragment {
                             e.printStackTrace();
                         }
                         finally {
+                            if (getActivity() == null || getActivity().isFinishing() || !isAdded()) {
+                                return;
+                            }
+
                             mobileHomeSwipeRefreshLayout.setRefreshing(false);
 
                             Toast.makeText(getActivity()
@@ -92,8 +96,6 @@ public class HomeMainFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("VOLLEY", error.getMessage());
-
                         mobileHomeSwipeRefreshLayout.setRefreshing(false);
                     }
                 }

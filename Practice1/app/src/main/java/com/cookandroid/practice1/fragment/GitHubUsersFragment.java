@@ -94,6 +94,10 @@ public class GitHubUsersFragment extends Fragment {
                             e.printStackTrace();
                         }
                         finally {
+                            if (getActivity() == null || getActivity().isFinishing() || !isAdded()) {
+                                return;
+                            }
+
                             githubSwipeRefreshLayout.setRefreshing(false);
 
                             Toast.makeText(getActivity()
@@ -105,8 +109,6 @@ public class GitHubUsersFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("VOLLEY", error.getMessage());
-
                         githubSwipeRefreshLayout.setRefreshing(false);
                     }
                 }
