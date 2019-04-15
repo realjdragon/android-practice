@@ -15,17 +15,12 @@ import com.cookandroid.practice1.entity.data.ItemInfo;
 public class ItemEvenCell extends BaseListCell<ItemInfo> {
     View view;
 
-    ViewHolder viewHolder;
+    ImageView mImageView;
 
-    private class ViewHolder {
-        ImageView mImageView;
-
-        TextView mTextView;
-    }
+    TextView mTextView;
 
     public ItemEvenCell(Context context) {
         super(context);
-        viewHolder = new ViewHolder();
     }
 
     @Override
@@ -33,8 +28,8 @@ public class ItemEvenCell extends BaseListCell<ItemInfo> {
         view = inflater.inflate(R.layout.item_deal_list_row_even, null);
 
         // findViewById는 한 번만..
-        viewHolder.mImageView = (ImageView)view.findViewById(R.id.item_image);
-        viewHolder.mTextView = (TextView)view.findViewById(R.id.item_name);
+        mImageView = (ImageView)view.findViewById(R.id.item_image);
+        mTextView = (TextView)view.findViewById(R.id.item_name);
 
         return view;
     }
@@ -43,8 +38,8 @@ public class ItemEvenCell extends BaseListCell<ItemInfo> {
     public void setData(ItemInfo data) {
         super.setData(data);
 
-        Glide.with(view).load(data.getImgUrl()).into(viewHolder.mImageView);
+        Glide.with(view).load(data.getImgUrl()).into(mImageView);
 
-        viewHolder.mTextView.setText(data.getName());
+        mTextView.setText(data.getName());
     }
 }
