@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#dddddd">
+    android:background="#000000"
+    android:padding="2dp">
 
     <ImageView android:id="@+id/item_image"
         android:layout_width="match_parent"

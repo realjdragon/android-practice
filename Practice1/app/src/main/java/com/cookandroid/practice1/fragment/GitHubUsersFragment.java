@@ -2,7 +2,6 @@ package com.cookandroid.practice1.fragment;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
 import com.cookandroid.practice1.adapter.base.EndlessScrollListener;
-import com.cookandroid.practice1.adapter.item.ItemListAdapter;
+import com.cookandroid.practice1.adapter.item.ItemAdapter;
 import com.cookandroid.practice1.api.GitHubApiClient;
 import com.cookandroid.practice1.entity.data.ItemInfo;
 import com.cookandroid.practice1.entity.api.github.SearchUsersApiResponse;
@@ -33,7 +32,7 @@ public class GitHubUsersFragment extends Fragment {
     // 유저 리스트
     ArrayList<ItemInfo> users;
 
-    ItemListAdapter adapter;
+    ItemAdapter adapter;
 
     View rootView;
 
@@ -46,7 +45,7 @@ public class GitHubUsersFragment extends Fragment {
 
         users = new ArrayList<ItemInfo>();
 
-        adapter = new ItemListAdapter(getContext());
+        adapter = new ItemAdapter(getContext());
         adapter.setDataList(users);
 
         // AdapterView는 ViewGroup에서 파생되는 클래스임.

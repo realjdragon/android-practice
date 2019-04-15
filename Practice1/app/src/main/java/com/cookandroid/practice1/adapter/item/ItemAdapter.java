@@ -9,11 +9,11 @@ import com.cookandroid.practice1.cell.item.ItemEvenCell;
 import com.cookandroid.practice1.cell.item.ItemOddCell;
 import com.cookandroid.practice1.entity.data.ItemInfo;
 
-public class ItemListAdapter extends BaseListAdapter<ItemInfo> {
+public class ItemAdapter extends BaseListAdapter<ItemInfo> {
     public static final int ITEM_ODD_ROW = 0;
     public static final int ITEM_EVEN_ROW = 1;
 
-    public ItemListAdapter(Context context) {
+    public ItemAdapter(Context context) {
         super(context);
     }
 

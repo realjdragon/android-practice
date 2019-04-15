@@ -6,13 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
-import com.cookandroid.practice1.adapter.item.ItemListAdapter;
+import com.cookandroid.practice1.adapter.item.ItemAdapter;
 import com.cookandroid.practice1.api.HomeMainApiClient;
 import com.cookandroid.practice1.entity.data.ItemInfo;
 import com.cookandroid.practice1.entity.api.home.HomeMainApiResponse;
@@ -32,7 +31,7 @@ public class HomeMainFragment extends Fragment {
     // 상품 리스트
     ArrayList<ItemInfo> deals;
 
-    ItemListAdapter adapter;
+    ItemAdapter adapter;
 
     View rootView;
 
@@ -45,7 +44,7 @@ public class HomeMainFragment extends Fragment {
 
         deals = new ArrayList<ItemInfo>();
 
-        adapter = new ItemListAdapter(getContext());
+        adapter = new ItemAdapter(getContext());
         adapter.setDataList(deals);
 
         // AdapterView는 ViewGroup에서 파생되는 클래스임.

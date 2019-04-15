@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#dddddd">
+    android:background="#000000"
+    android:padding="2dp">
 
     <TextView android:id="@+id/item_name"
         android:layout_width="match_parent"
@@ -12,12 +13,12 @@
         android:textSize="10sp"
         android:textStyle="bold"
         android:gravity="center_vertical"
-        android:background="#efcb94"/>
+        android:background="#EBD6B6"/>
 
     <ImageView android:id="@+id/item_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#efcb94"
+        android:background="#EBD6B6"
         android:adjustViewBounds="true"/>
 
 </LinearLayout>
