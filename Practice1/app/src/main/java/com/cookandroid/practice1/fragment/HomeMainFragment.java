@@ -42,7 +42,7 @@ public class HomeMainFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_home_main, container, false);
 
-        deals = new ArrayList<ItemInfo>();
+        deals = new ArrayList<>();
 
         adapter = new ItemAdapter(getContext());
         adapter.setDataList(deals);
@@ -50,7 +50,7 @@ public class HomeMainFragment extends Fragment {
         // AdapterView는 ViewGroup에서 파생되는 클래스임.
         // 다수의 항목을 열거할 때 사용하는 뷰들을 총칭하여 AdapterView라고 함!
         // AdapterView라고 부르는 이유는 UI에 표시할 항목을 adapter라는 객체에서 공급받기 때문
-        itemGridView = (GridView) rootView.findViewById(R.id.item_deal_grid);
+        itemGridView = rootView.findViewById(R.id.item_deal_grid);
 
         // 위에 만든 Adapter 객체를 ListView에 설정.
         itemGridView.setAdapter(adapter);

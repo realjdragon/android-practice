@@ -43,7 +43,7 @@ public class GitHubUsersFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_git_hub_users, container, false);
 
-        users = new ArrayList<ItemInfo>();
+        users = new ArrayList<>();
 
         adapter = new ItemAdapter(getContext());
         adapter.setDataList(users);
@@ -51,7 +51,7 @@ public class GitHubUsersFragment extends Fragment {
         // AdapterView는 ViewGroup에서 파생되는 클래스임.
         // 다수의 항목을 열거할 때 사용하는 뷰들을 총칭하여 AdapterView라고 함!
         // AdapterView라고 부르는 이유는 UI에 표시할 항목을 adapter라는 객체에서 공급받기 때문
-        itemListView = (ListView)rootView.findViewById(R.id.item_deal_list);
+        itemListView = rootView.findViewById(R.id.item_deal_list);
 
         // 무한 스크롤
         itemListView.setOnScrollListener(new EndlessScrollListener(3, 2) {
@@ -127,7 +127,7 @@ public class GitHubUsersFragment extends Fragment {
     }
 
     private void setUsersSwipeRefreshLayout() {
-        githubSwipeRefreshLayout = (SwipeRefreshLayout)rootView.findViewById(R.id.users_swipe_layout);
+        githubSwipeRefreshLayout = rootView.findViewById(R.id.users_swipe_layout);
         githubSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

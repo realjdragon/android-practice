@@ -15,7 +15,7 @@ public class GitHubApiClient {
         url += "?q=" + q;
         url += "&page=" + String.valueOf(page);
 
-        GsonRequest<SearchUsersApiResponse> request = new GsonRequest<SearchUsersApiResponse>(
+        GsonRequest<SearchUsersApiResponse> request = new GsonRequest<>(
                 url,
                 SearchUsersApiResponse.class,
                 null,

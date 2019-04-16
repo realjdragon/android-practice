@@ -28,8 +28,8 @@ public class ItemOddCell extends BaseListCell<ItemInfo> {
         view = inflater.inflate(R.layout.item_deal_list_row_odd, null);
 
         // findViewById는 한 번만..
-        mImageView = (ImageView)view.findViewById(R.id.item_image);
-        mTextView = (TextView)view.findViewById(R.id.item_name);
+        mImageView = view.findViewById(R.id.item_image);
+        mTextView = view.findViewById(R.id.item_name);
 
         return view;
     }
