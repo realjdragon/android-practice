@@ -120,7 +120,7 @@ public class HomeMainFragment extends Fragment {
     }
 
     private void setMobileHomeSwipeRefreshLayout() {
-        mobileHomeSwipeRefreshLayout = (SwipeRefreshLayout)rootView.findViewById(R.id.home_main_swipe_layout);
+        mobileHomeSwipeRefreshLayout = rootView.findViewById(R.id.home_main_swipe_layout);
         mobileHomeSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
