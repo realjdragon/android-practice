@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -13,12 +14,14 @@
         android:textSize="10sp"
         android:textStyle="bold"
         android:gravity="center_vertical"
-        android:background="#EBD6B6"/>
+        android:background="#EBD6B6"
+        tools:text="item_name"/>
 
     <ImageView android:id="@+id/item_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#EBD6B6"
-        android:adjustViewBounds="true"/>
+        android:adjustViewBounds="true"
+        tools:layout_height="300dp"/>
 
 </LinearLayout>
