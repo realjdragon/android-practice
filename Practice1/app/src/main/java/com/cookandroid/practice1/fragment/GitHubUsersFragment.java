@@ -13,9 +13,12 @@ import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
 import com.cookandroid.practice1.adapter.base.EndlessScrollListener;
 import com.cookandroid.practice1.adapter.item.ItemAdapter;
+import com.cookandroid.practice1.adapter.item.UglyAdapter;
 import com.cookandroid.practice1.api.GitHubApiClient;
+import com.cookandroid.practice1.entity.base.BaseModel;
 import com.cookandroid.practice1.entity.data.ItemInfo;
 import com.cookandroid.practice1.entity.api.github.SearchUsersApiResponse;
+import com.cookandroid.practice1.entity.data.UglyResult;
 
 import java.util.ArrayList;
 
@@ -30,11 +33,13 @@ public class GitHubUsersFragment extends Fragment {
     SwipeRefreshLayout githubSwipeRefreshLayout;
 
     // 유저 리스트
-    ArrayList<ItemInfo> users;
+    ArrayList<BaseModel> uglyUsers;
 
-    ItemAdapter adapter;
+    UglyAdapter adapter;
 
     View rootView;
+
+    UglyResult lastResult;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,10 +48,10 @@ public class GitHubUsersFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_git_hub_users, container, false);
 
-        users = new ArrayList<>();
+        uglyUsers = new ArrayList<>();
 
-        adapter = new ItemAdapter(getContext());
-        adapter.setDataList(users);
+        adapter = new UglyAdapter(getContext());
+        adapter.setDataList(uglyUsers);
 
         // AdapterView는 ViewGroup에서 파생되는 클래스임.
         // 다수의 항목을 열거할 때 사용하는 뷰들을 총칭하여 AdapterView라고 함!
@@ -75,7 +80,7 @@ public class GitHubUsersFragment extends Fragment {
         return rootView;
     }
 
-    private void setMobileHome(int page) {
+    private void setMobileHome(final int page) {
         // 안드로이드는 안정성의 이유로 Main Thread (UI Thread)에서만 UI를 변경할 수 있도록 제한됨
         // 또, Main Thread에서 네트워크작업도 제한됨..5초 이상의 지연이 있을 경우 App 종료..
         // 따라서 별도의 Thread를 구성하고 네트워크 작업을 해야하는데 매번 이러긴 귀찮으니
@@ -87,7 +92,7 @@ public class GitHubUsersFragment extends Fragment {
                     @Override
                     public void onResponse(SearchUsersApiResponse response) {
                         try {
-                            processGetUsersResponse(response);
+                            processGetUsersResponse(response, page);
                         }
                         catch (Exception e){
                             e.printStackTrace();
@@ -99,9 +104,9 @@ public class GitHubUsersFragment extends Fragment {
 
                             githubSwipeRefreshLayout.setRefreshing(false);
 
-                            Toast.makeText(getActivity()
-                                    , String.valueOf(users.size()) + "개 회원 load"
-                                    , Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity()
+//                                    , String.valueOf(users.size()) + "개 회원 load"
+//                                    , Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -114,16 +119,19 @@ public class GitHubUsersFragment extends Fragment {
         );
     }
 
-    private void processGetUsersResponse(SearchUsersApiResponse response) {
+    private void processGetUsersResponse(SearchUsersApiResponse response, int page) {
         ArrayList<SearchUsersApiResponse.User> users = response.getUsers();
 
         if (users != null && users.size() > 0) {
-            for (SearchUsersApiResponse.User user : users) {
-                this.users.add(new ItemInfo(user.getAvatarUrl(), user.getUrl()));
+//            for (SearchUsersApiResponse.User user : users) {
+//                this.users.add(new ItemInfo(user.getAvatarUrl(), user.getUrl()));
+//            }
+            if (lastResult == null) {
+                lastResult = new UglyResult();
             }
+            uglyUsers.addAll(lastResult.makeUglyList(users, page == 1));
+            adapter.notifyDataSetChanged();
         }
-
-        adapter.notifyDataSetChanged();
     }
 
     private void setUsersSwipeRefreshLayout() {
@@ -131,7 +139,7 @@ public class GitHubUsersFragment extends Fragment {
         githubSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                users.clear();
+                uglyUsers.clear();
                 setMobileHome(1);
             }
         });

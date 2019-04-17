@@ -1,7 +1,9 @@
 package com.cookandroid.practice1.entity.data;
 
+import com.cookandroid.practice1.entity.base.BaseModel;
+
 // 상품 딜
-public class ItemInfo {
+public class ItemInfo extends BaseModel {
     // 상품 이미지 경로
     String imgUrl;
 
