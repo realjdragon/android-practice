@@ -17,20 +17,89 @@ public class UglyResult extends BaseModel {
         this.users = users;
     }
 
-    public class SingleResult extends BaseModel {
-        public String imgUrl;
-        public String name;
+    public class OddResult extends BaseModel {
+        private String imgUrl;
+        private String name;
+
+        public String getImgUrl() {
+            return imgUrl;
+        }
+
+        public void setImgUrl(String imgUrl) {
+            this.imgUrl = imgUrl;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
+    public class EvenResult extends BaseModel {
+        private String imgUrl;
+        private String name;
+
+        public String getImgUrl() {
+            return imgUrl;
+        }
+
+        public void setImgUrl(String imgUrl) {
+            this.imgUrl = imgUrl;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 
     public class DoubleResult extends BaseModel {
-        public String imgUrl1;
-        public String name1;
-        public String imgUrl2;
-        public String name2;
+        private String imgUrl1;
+        private String name1;
+        private String imgUrl2;
+        private String name2;
+
+        public String getImgUrl1() {
+            return imgUrl1;
+        }
+
+        public void setImgUrl1(String imgUrl1) {
+            this.imgUrl1 = imgUrl1;
+        }
+
+        public String getName1() {
+            return name1;
+        }
+
+        public void setName1(String name1) {
+            this.name1 = name1;
+        }
+
+        public String getImgUrl2() {
+            return imgUrl2;
+        }
+
+        public void setImgUrl2(String imgUrl2) {
+            this.imgUrl2 = imgUrl2;
+        }
+
+        public String getName2() {
+            return name2;
+        }
+
+        public void setName2(String name2) {
+            this.name2 = name2;
+        }
     }
 
     public List<BaseModel> makeUglyList(boolean isFirst) {
-        List<BaseModel> results = new ArrayList<BaseModel>();
+        List<BaseModel> results = new ArrayList<>();
 
         if (isFirst) {
             for (int i = 0; i < users.size(); i += 2) {
@@ -45,11 +114,17 @@ public class UglyResult extends BaseModel {
         }
         else {
             for (int i = 0; i < users.size(); i++) {
-                SingleResult singleResult = new SingleResult();
-                singleResult.imgUrl = users.get(i).getAvatarUrl();
-                singleResult.name = users.get(i).getUrl();
-
-                results.add(singleResult);
+                if (i % 2 == 0) {
+                    OddResult oddResult = new OddResult();
+                    oddResult.imgUrl = users.get(i).getAvatarUrl();
+                    oddResult.name = users.get(i).getUrl();
+                    results.add(oddResult);
+                } else {
+                    EvenResult evenResult = new EvenResult();
+                    evenResult.imgUrl = users.get(i).getAvatarUrl();
+                    evenResult.name = users.get(i).getUrl();
+                    results.add(evenResult);
+                }
             }
         }
 

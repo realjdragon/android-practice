@@ -43,9 +43,9 @@ public class ItemUglyDoubleCell extends BaseListCell<UglyResult.DoubleResult> {
     public void setData(UglyResult.DoubleResult data) {
         super.setData(data);
 
-        Glide.with(view).load(data.imgUrl1).into(mImageView1);
-        mTextView1.setText(data.name1);
-        Glide.with(view).load(data.imgUrl2).into(mImageView2);
-        mTextView2.setText(data.name2);
+        Glide.with(view).load(data.getImgUrl1()).into(mImageView1);
+        mTextView1.setText(data.getName1());
+        Glide.with(view).load(data.getImgUrl2()).into(mImageView2);
+        mTextView2.setText(data.getName2());
     }
 }

@@ -24,7 +24,7 @@ public abstract class BaseListCell<T> extends FrameLayout {
     }
 
     public void setAdapter(BaseListAdapter<T> adapter) {
-        this.parentListAdapter = new WeakReference<BaseListAdapter<T>>(adapter);
+        this.parentListAdapter = new WeakReference<>(adapter);
     }
 
     public BaseListAdapter getAdapter() {

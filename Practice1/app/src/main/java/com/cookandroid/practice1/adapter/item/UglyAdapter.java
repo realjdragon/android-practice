@@ -6,13 +6,16 @@ import android.view.ViewGroup;
 
 import com.cookandroid.practice1.adapter.base.BaseListAdapter;
 import com.cookandroid.practice1.cell.item.ItemUglyDoubleCell;
-import com.cookandroid.practice1.cell.item.ItemUglySingleCell;
+import com.cookandroid.practice1.cell.item.ItemUglyEvenCell;
+import com.cookandroid.practice1.cell.item.ItemUglyOddCell;
 import com.cookandroid.practice1.entity.base.BaseModel;
 import com.cookandroid.practice1.entity.data.UglyResult;
 
 public class UglyAdapter extends BaseListAdapter<BaseModel> {
-    public static final int ITEM_DOUBLE = 0;
-    public static final int ITEM_SINGLE = 1;
+    public static final int UGLY_DOUBLE = 0;
+    public static final int UGLY_ODD_CELL = 1;
+    public static final int UGLY_EVEN_CELL = 2;
+
 
     public UglyAdapter(Context context) {
         super(context);
@@ -20,17 +23,20 @@ public class UglyAdapter extends BaseListAdapter<BaseModel> {
 
     @Override
     protected void initItemViewTypes() {
-        addItemViewType(ITEM_DOUBLE, ItemUglyDoubleCell.class);
-        addItemViewType(ITEM_SINGLE, ItemUglySingleCell.class);
+        addItemViewType(UGLY_DOUBLE, ItemUglyDoubleCell.class);
+        addItemViewType(UGLY_ODD_CELL, ItemUglyOddCell.class);
+        addItemViewType(UGLY_EVEN_CELL, ItemUglyEvenCell.class);
     }
 
     @Override
     public int getItemViewType(int position) {
         BaseModel item = getItem(position);
         if ( item instanceof UglyResult.DoubleResult) {
-            return ITEM_DOUBLE;
-        } else if ( item instanceof UglyResult.SingleResult ) {
-            return ITEM_SINGLE;
+            return UGLY_DOUBLE;
+        } else if ( item instanceof UglyResult.OddResult ) {
+            return UGLY_ODD_CELL;
+        } else if ( item instanceof UglyResult.EvenResult ) {
+            return UGLY_EVEN_CELL;
         }
 
         return -1;

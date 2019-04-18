@@ -11,20 +11,20 @@ import com.cookandroid.practice1.R;
 import com.cookandroid.practice1.cell.base.BaseListCell;
 import com.cookandroid.practice1.entity.data.UglyResult;
 
-public class ItemUglySingleCell extends BaseListCell<UglyResult.SingleResult> {
+public class ItemUglyEvenCell extends BaseListCell<UglyResult.EvenResult> {
     View view;
 
     ImageView mImageView;
 
     TextView mTextView;
 
-    public ItemUglySingleCell(Context context) {
+    public ItemUglyEvenCell(Context context) {
         super(context);
     }
 
     @Override
     public View onCreateView(Context context, LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.item_deal_list_row_odd, this, false);
+        view = inflater.inflate(R.layout.item_deal_list_row_even, this, false);
 
         // findViewById는 한 번만..
         mImageView = view.findViewById(R.id.item_image);
@@ -34,10 +34,10 @@ public class ItemUglySingleCell extends BaseListCell<UglyResult.SingleResult> {
     }
 
     @Override
-    public void setData(UglyResult.SingleResult data) {
+    public void setData(UglyResult.EvenResult data) {
         super.setData(data);
 
-        Glide.with(view).load(data.imgUrl).into(mImageView);
-        mTextView.setText(data.name);
+        Glide.with(view).load(data.getImgUrl()).into(mImageView);
+        mTextView.setText(data.getName());
     }
 }
