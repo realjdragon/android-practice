@@ -7,6 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UglyResult extends BaseModel {
+    private ArrayList<SearchUsersApiResponse.User> users;
+
+    public ArrayList<SearchUsersApiResponse.User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<SearchUsersApiResponse.User> users) {
+        this.users = users;
+    }
+
     public class SingleResult extends BaseModel {
         public String imgUrl;
         public String name;
@@ -19,7 +29,7 @@ public class UglyResult extends BaseModel {
         public String name2;
     }
 
-    public List<BaseModel> makeUglyList(ArrayList<SearchUsersApiResponse.User> users, boolean isFirst) {
+    public List<BaseModel> makeUglyList(boolean isFirst) {
         List<BaseModel> results = new ArrayList<BaseModel>();
 
         if (isFirst) {

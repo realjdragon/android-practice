@@ -28,7 +28,7 @@ public class ItemUglyDoubleCell extends BaseListCell<UglyResult.DoubleResult> {
 
     @Override
     public View onCreateView(Context context, LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.item_deal_ugly_row, null);
+        view = inflater.inflate(R.layout.item_deal_ugly_row, this, false);
 
         // findViewById는 한 번만..
         mImageView1 = view.findViewById(R.id.item_image1);

@@ -25,7 +25,7 @@ public class ItemOddCell extends BaseListCell<ItemInfo> {
 
     @Override
     public View onCreateView(Context context, LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.item_deal_list_row_odd, null);
+        view = inflater.inflate(R.layout.item_deal_list_row_odd, this, false);
 
         // findViewById는 한 번만..
         mImageView = view.findViewById(R.id.item_image);

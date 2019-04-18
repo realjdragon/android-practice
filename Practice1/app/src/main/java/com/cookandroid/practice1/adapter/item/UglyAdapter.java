@@ -5,8 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cookandroid.practice1.adapter.base.BaseListAdapter;
-import com.cookandroid.practice1.cell.item.ItemEvenCell;
-import com.cookandroid.practice1.cell.item.ItemOddCell;
 import com.cookandroid.practice1.cell.item.ItemUglyDoubleCell;
 import com.cookandroid.practice1.cell.item.ItemUglySingleCell;
 import com.cookandroid.practice1.entity.base.BaseModel;

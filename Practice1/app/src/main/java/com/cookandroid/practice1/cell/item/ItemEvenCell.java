@@ -25,7 +25,7 @@ public class ItemEvenCell extends BaseListCell<ItemInfo> {
 
     @Override
     public View onCreateView(Context context, LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.item_deal_list_row_even, null);
+        view = inflater.inflate(R.layout.item_deal_list_row_even, this, false);
 
         // findViewById는 한 번만..
         mImageView = view.findViewById(R.id.item_image);

@@ -59,7 +59,7 @@ public class GitHubUsersFragment extends Fragment {
         itemListView = rootView.findViewById(R.id.item_deal_list);
 
         // 무한 스크롤
-        itemListView.setOnScrollListener(new EndlessScrollListener(3, 2) {
+        itemListView.setOnScrollListener(new EndlessScrollListener(2, 2) {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
                 setMobileHome(page);
@@ -92,7 +92,7 @@ public class GitHubUsersFragment extends Fragment {
                     @Override
                     public void onResponse(SearchUsersApiResponse response) {
                         try {
-                            processGetUsersResponse(response, page);
+                            processGetUsersResponse(response, page == 1);
                         }
                         catch (Exception e){
                             e.printStackTrace();
@@ -104,9 +104,9 @@ public class GitHubUsersFragment extends Fragment {
 
                             githubSwipeRefreshLayout.setRefreshing(false);
 
-//                            Toast.makeText(getActivity()
-//                                    , String.valueOf(users.size()) + "개 회원 load"
-//                                    , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity()
+                                    , String.valueOf(uglyUsers.size() + 15) + "개 회원 load"
+                                    , Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -119,17 +119,17 @@ public class GitHubUsersFragment extends Fragment {
         );
     }
 
-    private void processGetUsersResponse(SearchUsersApiResponse response, int page) {
+    private void processGetUsersResponse(SearchUsersApiResponse response, boolean isFirst) {
         ArrayList<SearchUsersApiResponse.User> users = response.getUsers();
 
         if (users != null && users.size() > 0) {
-//            for (SearchUsersApiResponse.User user : users) {
-//                this.users.add(new ItemInfo(user.getAvatarUrl(), user.getUrl()));
-//            }
             if (lastResult == null) {
                 lastResult = new UglyResult();
             }
-            uglyUsers.addAll(lastResult.makeUglyList(users, page == 1));
+
+            lastResult.setUsers(users);
+
+            uglyUsers.addAll(lastResult.makeUglyList(isFirst));
             adapter.notifyDataSetChanged();
         }
     }
