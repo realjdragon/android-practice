@@ -1,5 +1,6 @@
 package com.cookandroid.practice1.adapter.viewpager;
 
+import com.cookandroid.practice1.fragment.AsymmetricFragment;
 import com.cookandroid.practice1.fragment.GitHubUsersFragment;
 import com.cookandroid.practice1.fragment.HomeMainFragment;
 
@@ -21,12 +22,14 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
                 return new HomeMainFragment();
             case 1:
                 return new GitHubUsersFragment();
+            case 2:
+                return new AsymmetricFragment();
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }

@@ -3,51 +3,25 @@ package com.cookandroid.practice1.entity.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.cookandroid.practice1.entity.base.BaseModel;
 import com.felipecsl.asymmetricgridview.library.model.AsymmetricItem;
 
-// 상품 딜
-public class ItemInfo extends BaseModel implements AsymmetricItem {
+public class DemoItem implements AsymmetricItem {
     private int columnSpan;
     private int rowSpan;
     private int position;
 
-    // 상품 이미지 경로
-    String imgUrl;
+    public DemoItem() {
+        this(1, 1, 0);
+    }
 
-    // 상품명
-    String name;
-
-    public ItemInfo(String imgUrl, String name, final int columnSpan, final int rowSpan, int position) {
-        this.imgUrl = imgUrl;
-        this.name= name;
+    public DemoItem(final int columnSpan, final int rowSpan, int position) {
         this.columnSpan = columnSpan;
         this.rowSpan = rowSpan;
         this.position = position;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
+    public DemoItem(final Parcel in) {
+        readFromParcel(in);
     }
 
     // 비대칭 아이템이라 아래 두 개의 메서드를 구현한거임.
@@ -59,6 +33,15 @@ public class ItemInfo extends BaseModel implements AsymmetricItem {
     @Override
     public int getRowSpan() {
         return rowSpan;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s: %sx%s", position, rowSpan, columnSpan);
     }
 
     @Override

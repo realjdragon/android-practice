@@ -110,7 +110,7 @@ public class HomeMainFragment extends Fragment {
             for (HomeMainApiResponse.HomeMainGroup homeMainGroup : homeMainGroups) {
                 if (homeMainGroup.getType() == 3) {
                     for (HomeMainApiResponse.Item item: homeMainGroup.getItemList()) {
-                        deals.add(new ItemInfo(item.getImageUrl(), item.getItemTitle()));
+                        deals.add(new ItemInfo(item.getImageUrl(), item.getItemTitle(), 1, 1, 0));
                     }
                 }
             }
