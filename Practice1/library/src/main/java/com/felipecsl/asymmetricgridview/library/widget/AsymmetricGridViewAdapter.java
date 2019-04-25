@@ -131,7 +131,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
                 ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
                 layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-//                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
 
                 v.setLayoutParams(layoutParams);
 

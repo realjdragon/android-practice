@@ -37,19 +37,17 @@ public class ListAdapter extends AsymmetricGridViewAdapter<ItemInfo> {
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
             v = inflater.inflate(R.layout.item_deal_list_row_odd, parent, false);
+            v.setId(item.getPosition());
 
             // findViewById는 한 번만..
             mImageView = v.findViewById(R.id.item_image);
             mTextView = v.findViewById(R.id.item_name);
-
-            Glide.with(v).load(item.getImgUrl()).into(mImageView);
-            mTextView.setText(item.getName());
         } else {
             v = convertView;
-
-            Glide.with(v).load(item.getImgUrl()).into(mImageView);
-            mTextView.setText(item.getName());
         }
+
+        Glide.with(v).load(item.getImgUrl()).into(mImageView);
+        mTextView.setText(String.valueOf(item.getPosition()) + " " + String.valueOf(v.getId()));
 
         return v;
     }
