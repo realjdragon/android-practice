@@ -126,7 +126,6 @@ public class AsymmetricFragment extends Fragment {
             if (isFirst) {
                 listView.setRequestedColumnCount(2);
                 listView.setAdapter(adapter);
-                listView.setDebugging(true);
             }
 
             adapter.appendItems(lastResult);
@@ -140,6 +139,7 @@ public class AsymmetricFragment extends Fragment {
             @Override
             public void onRefresh() {
                 users.clear();
+                currentOffset = 0;
                 setMobileHome(1);
             }
         });

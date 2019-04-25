@@ -20,6 +20,9 @@ import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridViewAdapter
 import java.util.List;
 
 public class ListAdapter extends AsymmetricGridViewAdapter<ItemInfo> {
+    ImageView mImageView;
+
+    TextView mTextView;
 
     public ListAdapter(final Context context, final AsymmetricGridView listView, final List<ItemInfo> items) {
         super(context, listView, items);
@@ -32,29 +35,17 @@ public class ListAdapter extends AsymmetricGridViewAdapter<ItemInfo> {
 
         View v;
         if (convertView == null) {
-//            v.setGravity(Gravity.CENTER);
-//            v.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.text_view_background_selector));
-//            v.setTextColor(Color.parseColor("#ffffff"));
-//            v.setTextSize(Utils.dpToPx(getContext(), 18));
-//            v.setId(item.getPosition());
-
             LayoutInflater inflater = LayoutInflater.from(context);
             v = inflater.inflate(R.layout.item_deal_list_row_odd, parent, false);
 
             // findViewById는 한 번만..
-            ImageView mImageView = v.findViewById(R.id.item_image);
-            TextView mTextView = v.findViewById(R.id.item_name);
+            mImageView = v.findViewById(R.id.item_image);
+            mTextView = v.findViewById(R.id.item_name);
 
             Glide.with(v).load(item.getImgUrl()).into(mImageView);
             mTextView.setText(item.getName());
-
-
         } else {
             v = convertView;
-
-            // findViewById는 한 번만..
-            ImageView mImageView = v.findViewById(R.id.item_image);
-            TextView mTextView = v.findViewById(R.id.item_name);
 
             Glide.with(v).load(item.getImgUrl()).into(mImageView);
             mTextView.setText(item.getName());
