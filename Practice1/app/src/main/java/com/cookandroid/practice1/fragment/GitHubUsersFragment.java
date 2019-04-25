@@ -103,10 +103,6 @@ public class GitHubUsersFragment extends Fragment {
                             }
 
                             githubSwipeRefreshLayout.setRefreshing(false);
-
-                            Toast.makeText(getActivity()
-                                    , String.valueOf(uglyUsers.size() + 15) + "개 회원 load"
-                                    , Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
