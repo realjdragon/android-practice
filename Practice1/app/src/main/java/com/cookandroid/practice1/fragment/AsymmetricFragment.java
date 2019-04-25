@@ -84,7 +84,7 @@ public class AsymmetricFragment extends Fragment {
                     @Override
                     public void onResponse(SearchUsersApiResponse response) {
                         try {
-                            processGetUsersResponse(response);
+                            processGetUsersResponse(response, page == 1);
                         }
                         catch (Exception e){
                             e.printStackTrace();
@@ -107,7 +107,7 @@ public class AsymmetricFragment extends Fragment {
         );
     }
 
-    private void processGetUsersResponse(SearchUsersApiResponse response) {
+    private void processGetUsersResponse(SearchUsersApiResponse response, boolean isFirst) {
         ArrayList<SearchUsersApiResponse.User> usersResponse = response.getUsers();
 
         if (usersResponse != null && usersResponse.size() > 0) {
@@ -123,11 +123,14 @@ public class AsymmetricFragment extends Fragment {
                 lastResult.add(item);
             }
 
+            if (isFirst) {
+                listView.setRequestedColumnCount(2);
+                listView.setAdapter(adapter);
+                listView.setDebugging(true);
+            }
+
             adapter.appendItems(lastResult);
 
-            listView.setRequestedColumnCount(2);
-            listView.setAdapter(adapter);
-            listView.setDebugging(true);
         }
     }
 
