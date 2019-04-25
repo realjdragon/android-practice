@@ -47,6 +47,8 @@ public class ListAdapter extends AsymmetricGridViewAdapter<ItemInfo> {
 
             Glide.with(v).load(item.getImgUrl()).into(mImageView);
             mTextView.setText(item.getName());
+
+
         } else {
             v = convertView;
 

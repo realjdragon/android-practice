@@ -129,6 +129,12 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
                 v.setLayoutParams(new LinearLayout.LayoutParams(getRowWidth(currentItem),
                         getRowHeight(currentItem)));
 
+                ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
+                layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+//                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+
+                v.setLayoutParams(layoutParams);
+
                 childLayout.addView(v);
             } else if (currentIndex < rowItems.size() - 1) {
                 // Try again with next item
