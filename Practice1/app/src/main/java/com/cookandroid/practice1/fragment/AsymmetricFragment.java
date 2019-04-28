@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -13,14 +12,10 @@ import com.cookandroid.practice1.adapter.base.EndlessScrollListener;
 import com.cookandroid.practice1.adapter.widget.ListAdapter;
 import com.cookandroid.practice1.api.GitHubApiClient;
 import com.cookandroid.practice1.entity.api.github.SearchUsersApiResponse;
-import com.cookandroid.practice1.entity.api.home.HomeMainApiResponse;
-import com.cookandroid.practice1.entity.data.DemoItem;
 import com.cookandroid.practice1.entity.data.ItemInfo;
-import com.cookandroid.practice1.entity.data.UglyResult;
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;

@@ -20,9 +20,11 @@ import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridViewAdapter
 import java.util.List;
 
 public class ListAdapter extends AsymmetricGridViewAdapter<ItemInfo> {
-    ImageView mImageView;
+    private class ViewHolder {
+        ImageView mImageView;
 
-    TextView mTextView;
+        TextView mTextView;
+    }
 
     public ListAdapter(final Context context, final AsymmetricGridView listView, final List<ItemInfo> items) {
         super(context, listView, items);
@@ -30,28 +32,27 @@ public class ListAdapter extends AsymmetricGridViewAdapter<ItemInfo> {
 
     @Override
     @SuppressWarnings("deprecation")
-    public View getActualView(final int position, final View convertView, final ViewGroup parent) {
+    public View getActualView(final int position, View convertView, final ViewGroup parent) {
         ItemInfo item = getItem(position);
 
-        View v;
+        ViewHolder viewHolder;
+
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            v = inflater.inflate(R.layout.item_deal_list_row_odd, parent, false);
+            convertView = inflater.inflate(R.layout.item_deal_list_row_odd, parent, false);
 
-            // findViewById는 한 번만..
-            mImageView = v.findViewById(R.id.item_image);
-            mTextView = v.findViewById(R.id.item_name);
+            viewHolder = new ViewHolder();
+            viewHolder.mImageView = convertView.findViewById(R.id.item_image);
+            viewHolder.mTextView = convertView.findViewById(R.id.item_name);
 
-            v.setId(item.getPosition());
+            convertView.setTag(R.string.asymmetric_grid_cell, viewHolder);
         } else {
-            v = convertView;
-            mImageView = v.findViewById(R.id.item_image);
-            mTextView = v.findViewById(R.id.item_name);
+            viewHolder = (ViewHolder)convertView.getTag(R.string.asymmetric_grid_cell);
         }
 
-        Glide.with(v).load(item.getImgUrl()).into(mImageView);
-        mTextView.setText(String.valueOf(item.getPosition()) + " " + String.valueOf(position));
+        Glide.with(convertView).load(item.getImgUrl()).into(viewHolder.mImageView);
+        viewHolder.mTextView.setText(item.getName());
 
-        return v;
+        return convertView;
     }
 }
