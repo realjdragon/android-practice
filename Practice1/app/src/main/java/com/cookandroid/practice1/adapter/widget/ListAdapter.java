@@ -1,8 +1,6 @@
 package com.cookandroid.practice1.adapter.widget;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cookandroid.practice1.R;
-import com.cookandroid.practice1.entity.data.DemoItem;
 import com.cookandroid.practice1.entity.data.ItemInfo;
-import com.felipecsl.asymmetricgridview.library.Utils;
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridViewAdapter;
 

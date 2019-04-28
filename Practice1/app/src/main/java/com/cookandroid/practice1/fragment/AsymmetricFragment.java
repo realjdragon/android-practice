@@ -68,10 +68,6 @@ public class AsymmetricFragment extends Fragment {
     }
 
     private void setMobileHome(final int page) {
-        // 안드로이드는 안정성의 이유로 Main Thread (UI Thread)에서만 UI를 변경할 수 있도록 제한됨
-        // 또, Main Thread에서 네트워크작업도 제한됨..5초 이상의 지연이 있을 경우 App 종료..
-        // 따라서 별도의 Thread를 구성하고 네트워크 작업을 해야하는데 매번 이러긴 귀찮으니
-        // Volley라는 패키지를 사용해서 손 쉽게 API를 호출하고 response 후에 UI 작업까지 할 수 있음.
         new GitHubApiClient().searchUsers(
                 "to",
                 page,
