@@ -79,7 +79,6 @@ public class ItemInfo extends BaseModel implements AsymmetricItem {
         dest.writeInt(position);
     }
 
-    /* Parcelable interface implementation */
     public static final Parcelable.Creator<DemoItem> CREATOR = new Parcelable.Creator<DemoItem>() {
 
         @Override
