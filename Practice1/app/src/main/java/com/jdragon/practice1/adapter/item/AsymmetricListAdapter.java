@@ -1,4 +1,4 @@
-package com.jdragon.practice1.adapter.widget;
+package com.jdragon.practice1.adapter.item;
 
 import android.content.Context;
 import android.view.LayoutInflater;

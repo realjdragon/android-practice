@@ -8,7 +8,7 @@ import com.jdragon.library.asymmetricgridview.widget.AsymmetricGridView;
 import com.jdragon.library.base.adapter.EndlessScrollListener;
 import com.jdragon.library.base.fragment.BaseFragment;
 import com.jdragon.practice1.R;
-import com.jdragon.practice1.adapter.widget.AsymmetricListAdapter;
+import com.jdragon.practice1.adapter.item.AsymmetricListAdapter;
 import com.jdragon.practice1.api.GitHubApiClient;
 import com.jdragon.practice1.entity.api.github.SearchUsersApiResponse;
 import com.jdragon.practice1.entity.data.ItemInfo;
