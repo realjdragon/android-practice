@@ -16,6 +16,10 @@ public class MainActivity extends AppCompatActivity {
         setTitle(R.string.main_title);
 
         ViewPager viewPager = findViewById(R.id.main_view_pager);
-        viewPager.setAdapter(new MainViewPagerAdapter(getSupportFragmentManager()));
+        MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+
+        // 페이지 넘겨도 살아있도록
+        viewPager.setOffscreenPageLimit(adapter.getCount());
     }
 }
