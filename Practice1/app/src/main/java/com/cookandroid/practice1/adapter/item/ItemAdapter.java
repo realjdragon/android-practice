@@ -9,6 +9,9 @@ import com.cookandroid.practice1.cell.item.ItemEvenCell;
 import com.cookandroid.practice1.cell.item.ItemOddCell;
 import com.cookandroid.practice1.entity.data.ItemInfo;
 
+/**
+ * 홀수, 짝수 cell 번갈아가며 다른 view 반환
+ */
 public class ItemAdapter extends BaseListAdapter<ItemInfo> {
     public static final int ITEM_ODD_ROW = 0;
     public static final int ITEM_EVEN_ROW = 1;
@@ -25,7 +28,7 @@ public class ItemAdapter extends BaseListAdapter<ItemInfo> {
 
     @Override
     public int getItemViewType(int position) {
-        // even, odd가 무한 반복되어야 하기 때문에..
+        // 홀수, 짝수가 무한 반복되어야 하기 때문에..
         return position % 2;
     }
 

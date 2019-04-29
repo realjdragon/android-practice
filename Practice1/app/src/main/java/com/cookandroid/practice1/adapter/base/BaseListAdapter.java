@@ -18,8 +18,8 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
 
     public BaseListAdapter(Context context) {
         this.mContext = context;
-        mItemObjectList = new ArrayList<Class>();
-        mItemViewMap = new HashMap<Integer, Class>();
+        mItemObjectList = new ArrayList<>();
+        mItemViewMap = new HashMap<>();
 
         initItemViewTypes();
     }

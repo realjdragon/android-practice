@@ -121,7 +121,7 @@ public class GitHubUsersFragment extends Fragment {
     }
 
     private void setUsersSwipeRefreshLayout() {
-        githubSwipeRefreshLayout = rootView.findViewById(R.id.users_swipe_layout);
+        githubSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         githubSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
