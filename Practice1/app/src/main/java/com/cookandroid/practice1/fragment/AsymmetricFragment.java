@@ -9,10 +9,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.cookandroid.practice1.R;
 import com.cookandroid.practice1.adapter.base.EndlessScrollListener;
+import com.cookandroid.practice1.adapter.item.UglyAdapter;
 import com.cookandroid.practice1.adapter.widget.ListAdapter;
 import com.cookandroid.practice1.api.GitHubApiClient;
 import com.cookandroid.practice1.entity.api.github.SearchUsersApiResponse;
 import com.cookandroid.practice1.entity.data.ItemInfo;
+import com.cookandroid.practice1.fragment.base.BaseFragment;
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
 
 import java.util.ArrayList;
@@ -20,12 +22,10 @@ import java.util.ArrayList;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-public class AsymmetricFragment extends Fragment {
-    View rootView;
-
-    // 스와이프 레이아웃
-    SwipeRefreshLayout githubSwipeRefreshLayout;
-
+/**
+ * AsymmetricGridView로 구현된 GitHub 회원 리스트
+ */
+public class AsymmetricFragment extends BaseFragment {
     private AsymmetricGridView listView;
 
     private ListAdapter adapter;
@@ -39,35 +39,52 @@ public class AsymmetricFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
-        rootView = inflater.inflate(R.layout.fragment_asymmetric, container, false);
+    @Override
+    public int inflaterRootView() {
+        return R.layout.fragment_asymmetric;
+    }
 
+    @Override
+    public void initUI() {
         listView = rootView.findViewById(R.id.listView);
+    }
+
+    @Override
+    public void initData() {
+        users = new ArrayList<>();
+        adapter = new ListAdapter(getActivity(), listView, users);
+
+        // API 호출해서 ListView Set
+        setMobileHomeData(1);
+    }
+
+    @Override
+    public void addListeners() {
+        // 스와이프 새로고침
+        setSwipeRefreshLayout(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                users.clear();
+                currentOffset = 0;
+                setMobileHomeData(1);
+            }
+        });
 
         // 무한 스크롤
         listView.setOnScrollListener(new EndlessScrollListener(2, 2) {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
-                setMobileHome(page);
+                setMobileHomeData(page);
 
                 return true;
             }
         });
-
-        users = new ArrayList<>();
-        adapter = new ListAdapter(getActivity(), listView, users);
-
-        // 스와이프 새로고침 설정
-        setUsersSwipeRefreshLayout();
-
-        // API 호출해서 ListView Set
-        setMobileHome(1);
-
-        return rootView;
     }
 
-    private void setMobileHome(final int page) {
+    private void setMobileHomeData(final int page) {
         new GitHubApiClient().searchUsers(
                 "to",
                 page,
@@ -85,14 +102,14 @@ public class AsymmetricFragment extends Fragment {
                                 return;
                             }
 
-                            githubSwipeRefreshLayout.setRefreshing(false);
+                            swipeRefreshLayout.setRefreshing(false);
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        githubSwipeRefreshLayout.setRefreshing(false);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 }
         );
@@ -122,17 +139,5 @@ public class AsymmetricFragment extends Fragment {
             adapter.appendItems(lastResult);
 
         }
-    }
-
-    private void setUsersSwipeRefreshLayout() {
-        githubSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
-        githubSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                users.clear();
-                currentOffset = 0;
-                setMobileHome(1);
-            }
-        });
     }
 }

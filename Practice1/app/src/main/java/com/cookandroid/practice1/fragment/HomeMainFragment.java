@@ -25,7 +25,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  */
 public class HomeMainFragment extends BaseFragment {
     // 상품 딜 그리드뷰
-    GridView itemGridView;
+    GridView gridView;
 
     // 상품 목록
     ArrayList<ItemInfo> items;
@@ -45,6 +45,7 @@ public class HomeMainFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        gridView = rootView.findViewById(R.id.item_deal_grid);
     }
 
     @Override
@@ -54,8 +55,7 @@ public class HomeMainFragment extends BaseFragment {
         adapter = new ItemAdapter(getContext());
         adapter.setDataList(items);
 
-        itemGridView = rootView.findViewById(R.id.item_deal_grid);
-        itemGridView.setAdapter(adapter);
+        gridView.setAdapter(adapter);
 
         // API 호출해서 ListView Set
         setMobileHomeData();

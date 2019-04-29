@@ -27,7 +27,7 @@ import java.util.ArrayList;
  */
 public class GitHubUsersFragment extends BaseFragment {
     // 리스트뷰
-    ListView itemListView;
+    ListView listView;
 
     // 유저 리스트
     ArrayList<BaseModel> uglyUsers;
@@ -49,6 +49,7 @@ public class GitHubUsersFragment extends BaseFragment {
 
     @Override
     public void initUI() {
+        listView = rootView.findViewById(R.id.item_deal_list);
     }
 
     @Override
@@ -58,10 +59,8 @@ public class GitHubUsersFragment extends BaseFragment {
         adapter = new UglyAdapter(getContext());
         adapter.setDataList(uglyUsers);
 
-        itemListView = rootView.findViewById(R.id.item_deal_list);
-
         // 위에 만든 Adapter 객체를 ListView에 설정.
-        itemListView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
         // API 호출해서 ListView Set
         setMobileHomeData(1);
@@ -79,7 +78,7 @@ public class GitHubUsersFragment extends BaseFragment {
         });
 
         // 무한 스크롤
-        itemListView.setOnScrollListener(new EndlessScrollListener(2, 2) {
+        listView.setOnScrollListener(new EndlessScrollListener(2, 2) {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
                 setMobileHomeData(page);
