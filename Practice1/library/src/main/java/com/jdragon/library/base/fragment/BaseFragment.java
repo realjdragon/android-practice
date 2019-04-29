@@ -1,6 +1,5 @@
 package com.jdragon.library.base.fragment;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,15 +19,13 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
 
     private Context context;
 
-    protected Dialog dialog;
-
     protected SwipeRefreshLayout swipeRefreshLayout;
 
     protected ViewGroup container;
 
     protected View rootView;
 
-    protected int curPage;
+    protected int currentOffset;
 
     protected boolean isStop;
 
@@ -47,7 +44,7 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
         context = getActivity();
         this.container = container;
         rootView = inflater.inflate(inflaterRootView(), container, false);
-        curPage = 1;
+        currentOffset = 0;
         initUI();
         initData();
         addListeners();

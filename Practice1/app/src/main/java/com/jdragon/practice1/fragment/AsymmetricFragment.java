@@ -28,8 +28,6 @@ public class AsymmetricFragment extends BaseFragment {
 
     private ListAdapter adapter;
 
-    private int currentOffset = 0;
-
     private ArrayList<ItemInfo> users;
 
     private ArrayList<ItemInfo> lastResult;

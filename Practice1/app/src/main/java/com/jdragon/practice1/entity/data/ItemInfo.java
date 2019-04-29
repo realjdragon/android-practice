@@ -26,6 +26,10 @@ public class ItemInfo extends BaseModel implements AsymmetricItem {
         this.position = position;
     }
 
+    public ItemInfo(final Parcel in) {
+        readFromParcel(in);
+    }
+
     public String getName() {
         return name;
     }
@@ -79,16 +83,16 @@ public class ItemInfo extends BaseModel implements AsymmetricItem {
         dest.writeInt(position);
     }
 
-    public static final Parcelable.Creator<DemoItem> CREATOR = new Parcelable.Creator<DemoItem>() {
+    public static final Parcelable.Creator<ItemInfo> CREATOR = new Parcelable.Creator<ItemInfo>() {
 
         @Override
-        public DemoItem createFromParcel(final Parcel in) {
-            return new DemoItem(in);
+        public ItemInfo createFromParcel(final Parcel in) {
+            return new ItemInfo(in);
         }
 
         @Override
-        public DemoItem[] newArray(final int size) {
-            return new DemoItem[size];
+        public ItemInfo[] newArray(final int size) {
+            return new ItemInfo[size];
         }
     };
 }
