@@ -1,24 +1,19 @@
 package com.jdragon.practice1.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.jdragon.practice1.R;
+import com.jdragon.library.asymmetricgridview.widget.AsymmetricGridView;
 import com.jdragon.library.base.adapter.EndlessScrollListener;
+import com.jdragon.library.base.fragment.BaseFragment;
+import com.jdragon.practice1.R;
 import com.jdragon.practice1.adapter.widget.ListAdapter;
 import com.jdragon.practice1.api.GitHubApiClient;
 import com.jdragon.practice1.entity.api.github.SearchUsersApiResponse;
 import com.jdragon.practice1.entity.data.ItemInfo;
-import com.jdragon.library.base.fragment.BaseFragment;
-import com.jdragon.library.asymmetricgridview.widget.AsymmetricGridView;
 
 import java.util.ArrayList;
-
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**
  * AsymmetricGridView로 구현된 GitHub 회원 리스트
@@ -31,12 +26,6 @@ public class AsymmetricFragment extends BaseFragment {
     private ArrayList<ItemInfo> users;
 
     private ArrayList<ItemInfo> lastResult;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
 
     @Override
     public int inflaterRootView() {

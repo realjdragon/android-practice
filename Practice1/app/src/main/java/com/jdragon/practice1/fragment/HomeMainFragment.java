@@ -1,24 +1,20 @@
 package com.jdragon.practice1.fragment;
 
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridView;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.jdragon.library.base.fragment.BaseFragment;
 import com.jdragon.practice1.R;
 import com.jdragon.practice1.adapter.item.ItemAdapter;
 import com.jdragon.practice1.api.HomeMainApiClient;
-import com.jdragon.practice1.entity.data.ItemInfo;
 import com.jdragon.practice1.entity.api.home.HomeMainApiResponse;
-import com.jdragon.library.base.fragment.BaseFragment;
+import com.jdragon.practice1.entity.data.ItemInfo;
 
 import java.util.ArrayList;
-
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**
  * GridView로 구현된 상품 리스트
@@ -31,12 +27,6 @@ public class HomeMainFragment extends BaseFragment {
     ArrayList<ItemInfo> items;
 
     ItemAdapter adapter;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
 
     @Override
     public int inflaterRootView() {

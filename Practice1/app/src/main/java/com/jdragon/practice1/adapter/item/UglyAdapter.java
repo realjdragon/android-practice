@@ -44,8 +44,6 @@ public class UglyAdapter extends BaseListAdapter<BaseModel> {
 
     @Override
     public View getView(int position, View view, ViewGroup group) {
-        View v = super.getView(position, view, group);
-
-        return v;
+        return super.getView(position, view, group);
     }
 }

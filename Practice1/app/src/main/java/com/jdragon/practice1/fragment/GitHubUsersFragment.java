@@ -1,24 +1,20 @@
 package com.jdragon.practice1.fragment;
 
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.jdragon.practice1.R;
 import com.jdragon.library.base.adapter.EndlessScrollListener;
+import com.jdragon.library.base.entity.BaseModel;
+import com.jdragon.library.base.fragment.BaseFragment;
+import com.jdragon.practice1.R;
 import com.jdragon.practice1.adapter.item.UglyAdapter;
 import com.jdragon.practice1.api.GitHubApiClient;
 import com.jdragon.practice1.entity.api.github.SearchUsersApiResponse;
-import com.jdragon.library.base.entity.BaseModel;
 import com.jdragon.practice1.entity.data.UglyResult;
-import com.jdragon.library.base.fragment.BaseFragment;
 
 import java.util.ArrayList;
 
@@ -35,12 +31,6 @@ public class GitHubUsersFragment extends BaseFragment {
     UglyAdapter adapter;
 
     UglyResult lastResult;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
 
     @Override
     public int inflaterRootView() {

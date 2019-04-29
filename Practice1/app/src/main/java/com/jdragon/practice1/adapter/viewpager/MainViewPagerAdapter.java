@@ -19,11 +19,11 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
         switch (position)
         {
             case 0:
-                return new AsymmetricFragment();
-            case 1:
                 return new HomeMainFragment();
-            case 2:
+            case 1:
                 return new GitHubUsersFragment();
+            case 2:
+                return new AsymmetricFragment();
         }
         return null;
     }
