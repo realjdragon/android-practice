@@ -33,17 +33,19 @@ public class AsymmetricListAdapter extends AsymmetricGridViewAdapter<ItemInfo> {
 
         ViewHolder viewHolder;
 
+        int rowId = R.layout.item_deal_list_row_odd;
+
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.item_deal_list_row_odd, parent, false);
+            convertView = inflater.inflate(rowId, parent, false);
 
             viewHolder = new ViewHolder();
             viewHolder.mImageView = convertView.findViewById(R.id.item_image);
             viewHolder.mTextView = convertView.findViewById(R.id.item_name);
 
-            convertView.setTag(R.layout.item_deal_list_row_odd, viewHolder);
+            convertView.setTag(rowId, viewHolder);
         } else {
-            viewHolder = (ViewHolder)convertView.getTag(R.layout.item_deal_list_row_odd);
+            viewHolder = (ViewHolder)convertView.getTag(rowId);
         }
 
         Glide.with(convertView).load(item.getImgUrl()).into(viewHolder.mImageView);

@@ -139,27 +139,6 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
         getActivity().setIntent(newIntent);
     }
 
-    public void replaceChildFragment(@IdRes int resId, Fragment fragment) {
-        replaceFragment(getChildFragmentManager(),resId,fragment,false);
-    }
-
-    public void replaceFragment(@IdRes int resId, Fragment fragment){
-        replaceFragment(resId,fragment,false);
-    }
-
-    public void replaceFragment(@IdRes int resId, Fragment fragment, boolean isBackStack) {
-        replaceFragment(getFragmentManager(),resId,fragment,isBackStack);
-    }
-
-    public void replaceFragment(FragmentManager fragmentManager, @IdRes int resId, Fragment fragment, boolean isBackStack) {
-        FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction();
-        fragmentTransaction.replace(resId, fragment);
-        if(isBackStack){
-            fragmentTransaction.addToBackStack(null);
-        }
-        fragmentTransaction.commit();
-    }
-
     protected void setSwipeRefreshLayout(SwipeRefreshLayout.OnRefreshListener listener, @IdRes int id) {
         swipeRefreshLayout = rootView.findViewById(id);
         if (swipeRefreshLayout == null) {
