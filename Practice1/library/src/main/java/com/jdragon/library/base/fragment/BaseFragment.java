@@ -23,8 +23,6 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
 
     protected View rootView;
 
-    protected int currentOffset;
-
     protected boolean isStop;
 
     public ViewGroup getContainer(){
@@ -42,7 +40,6 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
         context = getActivity();
         this.container = container;
         rootView = inflater.inflate(inflaterRootView(), container, false);
-        currentOffset = 0;
         initUI();
         initData();
         addListeners();

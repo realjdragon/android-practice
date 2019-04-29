@@ -10,7 +10,6 @@ import com.jdragon.library.asymmetricgridview.model.AsymmetricItem;
 public class ItemInfo extends BaseModel implements AsymmetricItem {
     private int columnSpan;
     private int rowSpan;
-    private int position;
 
     // 상품 이미지 경로
     String imgUrl;
@@ -18,12 +17,11 @@ public class ItemInfo extends BaseModel implements AsymmetricItem {
     // 상품명
     String name;
 
-    public ItemInfo(String imgUrl, String name, final int columnSpan, final int rowSpan, int position) {
+    public ItemInfo(String imgUrl, String name, final int columnSpan, final int rowSpan) {
         this.imgUrl = imgUrl;
         this.name= name;
         this.columnSpan = columnSpan;
         this.rowSpan = rowSpan;
-        this.position = position;
     }
 
     public ItemInfo(final Parcel in) {
@@ -46,14 +44,6 @@ public class ItemInfo extends BaseModel implements AsymmetricItem {
         this.imgUrl = imgUrl;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
     // 비대칭 아이템이라 아래 두 개의 메서드를 구현한거임.
     @Override
     public int getColumnSpan() {
@@ -73,14 +63,12 @@ public class ItemInfo extends BaseModel implements AsymmetricItem {
     private void readFromParcel(final Parcel in) {
         columnSpan = in.readInt();
         rowSpan = in.readInt();
-        position = in.readInt();
     }
 
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeInt(columnSpan);
         dest.writeInt(rowSpan);
-        dest.writeInt(position);
     }
 
     public static final Parcelable.Creator<ItemInfo> CREATOR = new Parcelable.Creator<ItemInfo>() {

@@ -53,7 +53,6 @@ public class AsymmetricFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 users.clear();
-                currentOffset = 0;
                 setMobileHomeData(1);
             }
         }, R.id.swipe_refresh_layout);
@@ -108,7 +107,7 @@ public class AsymmetricFragment extends BaseFragment {
             int colSpan, rowSpan;
             for (int i = 0; i < usersResponse.size(); i++) {
                 colSpan = rowSpan = getColSpanByPosition(i);
-                final ItemInfo item = new ItemInfo(usersResponse.get(i).getAvatarUrl(), usersResponse.get(i).getUrl(), colSpan, rowSpan, currentOffset + i);
+                final ItemInfo item = new ItemInfo(usersResponse.get(i).getAvatarUrl(), usersResponse.get(i).getUrl(), colSpan, rowSpan);
                 lastResult.add(item);
             }
 

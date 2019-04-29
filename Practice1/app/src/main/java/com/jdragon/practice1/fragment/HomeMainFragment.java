@@ -99,7 +99,7 @@ public class HomeMainFragment extends BaseFragment {
             for (HomeMainApiResponse.HomeMainGroup homeMainGroup : homeMainGroups) {
                 if (homeMainGroup.getType() == 3) {
                     for (HomeMainApiResponse.Item item: homeMainGroup.getItemList()) {
-                        items.add(new ItemInfo(item.getImageUrl(), item.getItemTitle(), 1, 1, 0));
+                        items.add(new ItemInfo(item.getImageUrl(), item.getItemTitle(), 1, 1));
                     }
                 }
             }
