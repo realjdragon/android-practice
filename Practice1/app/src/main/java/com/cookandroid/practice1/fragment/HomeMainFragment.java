@@ -85,10 +85,6 @@ public class HomeMainFragment extends Fragment {
                             }
 
                             mobileHomeSwipeRefreshLayout.setRefreshing(false);
-
-                            Toast.makeText(getActivity()
-                                    , String.valueOf(deals.size()) + "개 상품 load"
-                                    , Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
