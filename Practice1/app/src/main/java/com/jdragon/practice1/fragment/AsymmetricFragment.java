@@ -105,13 +105,9 @@ public class AsymmetricFragment extends BaseFragment {
 
         if (usersResponse != null && usersResponse.size() > 0) {
             lastResult = new ArrayList<>();
+            int colSpan, rowSpan;
             for (int i = 0; i < usersResponse.size(); i++) {
-                int colSpan = 1;
-                // 둘하나 둘하나
-                if (i % 3 == 2) {
-                    colSpan = 2;
-                }
-                int rowSpan = colSpan;
+                colSpan = rowSpan = getColSpanByPosition(i);
                 final ItemInfo item = new ItemInfo(usersResponse.get(i).getAvatarUrl(), usersResponse.get(i).getUrl(), colSpan, rowSpan, currentOffset + i);
                 lastResult.add(item);
             }
@@ -124,5 +120,10 @@ public class AsymmetricFragment extends BaseFragment {
             adapter.appendItems(lastResult);
 
         }
+    }
+
+    private int getColSpanByPosition(int position) {
+        // 둘하나 둘하나
+        return position % 3 == 2? 2 : 1;
     }
 }
