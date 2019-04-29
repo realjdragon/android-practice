@@ -3,8 +3,8 @@ package com.jdragon.practice1.entity.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.jdragon.practice1.entity.base.BaseModel;
-import com.jdragon.asymmetricgridview.library.model.AsymmetricItem;
+import com.jdragon.library.base.entity.BaseModel;
+import com.jdragon.library.asymmetricgridview.model.AsymmetricItem;
 
 // 상품 딜
 public class ItemInfo extends BaseModel implements AsymmetricItem {

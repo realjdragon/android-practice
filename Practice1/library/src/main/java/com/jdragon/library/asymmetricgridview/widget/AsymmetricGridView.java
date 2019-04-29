@@ -1,4 +1,4 @@
-package com.jdragon.asymmetricgridview.library.widget;
+package com.jdragon.library.asymmetricgridview.widget;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -10,8 +10,8 @@ import android.view.ViewTreeObserver;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.jdragon.asymmetricgridview.library.AsymmetricGridViewAdapterContract;
-import com.jdragon.asymmetricgridview.library.Utils;
+import com.jdragon.library.asymmetricgridview.AsymmetricGridViewAdapterContract;
+import com.jdragon.library.asymmetricgridview.Utils;
 
 public class AsymmetricGridView extends ListView {
 

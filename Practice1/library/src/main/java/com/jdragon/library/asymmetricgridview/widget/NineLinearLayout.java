@@ -1,4 +1,4 @@
-package com.jdragon.asymmetricgridview.library.widget;
+package com.jdragon.library.asymmetricgridview.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;

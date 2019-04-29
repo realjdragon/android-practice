@@ -4,11 +4,11 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jdragon.practice1.adapter.base.BaseListAdapter;
+import com.jdragon.library.base.adapter.BaseListAdapter;
 import com.jdragon.practice1.cell.item.ItemUglyDoubleCell;
 import com.jdragon.practice1.cell.item.ItemUglyEvenCell;
 import com.jdragon.practice1.cell.item.ItemUglyOddCell;
-import com.jdragon.practice1.entity.base.BaseModel;
+import com.jdragon.library.base.entity.BaseModel;
 import com.jdragon.practice1.entity.data.UglyResult;
 
 public class UglyAdapter extends BaseListAdapter<BaseModel> {

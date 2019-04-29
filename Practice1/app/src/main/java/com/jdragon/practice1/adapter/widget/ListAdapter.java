@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jdragon.practice1.R;
 import com.jdragon.practice1.entity.data.ItemInfo;
-import com.jdragon.asymmetricgridview.library.widget.AsymmetricGridView;
-import com.jdragon.asymmetricgridview.library.widget.AsymmetricGridViewAdapter;
+import com.jdragon.library.asymmetricgridview.widget.AsymmetricGridView;
+import com.jdragon.library.asymmetricgridview.widget.AsymmetricGridViewAdapter;
 
 import java.util.List;
 

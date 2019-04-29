@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.jdragon.asymmetricgridview.library;
+package com.jdragon.library.asymmetricgridview;
 
 import java.util.ArrayDeque;
 import java.util.concurrent.BlockingQueue;

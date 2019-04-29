@@ -1,11 +1,11 @@
-package com.jdragon.practice1.adapter.base;
+package com.jdragon.library.base.adapter;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.jdragon.practice1.cell.base.BaseListCell;
+import com.jdragon.library.base.cell.BaseListCell;
 
 import java.util.ArrayList;
 import java.util.HashMap;

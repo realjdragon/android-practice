@@ -1,9 +1,9 @@
-package com.jdragon.asymmetricgridview.library.widget;
+package com.jdragon.library.asymmetricgridview.widget;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.jdragon.asymmetricgridview.library.model.AsymmetricItem;
+import com.jdragon.library.asymmetricgridview.model.AsymmetricItem;
 
 import java.util.ArrayList;
 import java.util.List;

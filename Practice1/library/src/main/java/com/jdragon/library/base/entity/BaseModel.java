@@ -1,4 +1,4 @@
-package com.jdragon.practice1.entity.base;
+package com.jdragon.library.base.entity;
 
 public class BaseModel {
     public BaseModel() {

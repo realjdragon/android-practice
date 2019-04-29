@@ -1,4 +1,4 @@
-package com.jdragon.asymmetricgridview.library.widget;
+package com.jdragon.library.asymmetricgridview.widget;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,11 +11,11 @@ import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
-import com.jdragon.asymmetricgridview.library.AsymmetricGridViewAdapterContract;
-import com.jdragon.asymmetricgridview.library.AsyncTaskCompat;
-import com.jdragon.asymmetricgridview.library.R;
-import com.jdragon.asymmetricgridview.library.Utils;
-import com.jdragon.asymmetricgridview.library.model.AsymmetricItem;
+import com.jdragon.library.R;
+import com.jdragon.library.asymmetricgridview.AsymmetricGridViewAdapterContract;
+import com.jdragon.library.asymmetricgridview.AsyncTaskCompat;
+import com.jdragon.library.asymmetricgridview.Utils;
+import com.jdragon.library.asymmetricgridview.model.AsymmetricItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;

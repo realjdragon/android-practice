@@ -1,4 +1,4 @@
-package com.jdragon.asymmetricgridview.library.widget;
+package com.jdragon.library.asymmetricgridview.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

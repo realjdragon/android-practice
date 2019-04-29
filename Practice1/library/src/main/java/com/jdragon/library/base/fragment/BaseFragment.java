@@ -1,4 +1,4 @@
-package com.jdragon.practice1.fragment.base;
+package com.jdragon.library.base.fragment;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -15,8 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import com.jdragon.practice1.R;
 
 public abstract class BaseFragment extends Fragment implements BaseInterface {
 
@@ -161,14 +159,6 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
             fragmentTransaction.addToBackStack(null);
         }
         fragmentTransaction.commit();
-    }
-
-    protected void setSwipeRefreshLayout(SwipeRefreshLayout.OnRefreshListener listener) {
-        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
-        if (swipeRefreshLayout == null) {
-            return;
-        }
-        swipeRefreshLayout.setOnRefreshListener(listener);
     }
 
     protected void setSwipeRefreshLayout(SwipeRefreshLayout.OnRefreshListener listener, int id) {

@@ -1,4 +1,4 @@
-package com.jdragon.asymmetricgridview.library.model;
+package com.jdragon.library.asymmetricgridview.model;
 
 import android.os.Parcelable;
 

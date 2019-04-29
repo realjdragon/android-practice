@@ -1,4 +1,4 @@
-package com.jdragon.practice1.fragment.base;
+package com.jdragon.library.base.fragment;
 
 public interface BaseInterface {
 

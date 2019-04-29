@@ -3,7 +3,7 @@ package com.jdragon.practice1.entity.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.jdragon.asymmetricgridview.library.model.AsymmetricItem;
+import com.jdragon.library.asymmetricgridview.model.AsymmetricItem;
 
 public class DemoItem implements AsymmetricItem {
     private int columnSpan;

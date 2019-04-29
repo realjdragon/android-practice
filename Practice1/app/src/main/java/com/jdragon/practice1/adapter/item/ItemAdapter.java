@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jdragon.practice1.adapter.base.BaseListAdapter;
+import com.jdragon.library.base.adapter.BaseListAdapter;
 import com.jdragon.practice1.cell.item.ItemEvenCell;
 import com.jdragon.practice1.cell.item.ItemOddCell;
 import com.jdragon.practice1.entity.data.ItemInfo;

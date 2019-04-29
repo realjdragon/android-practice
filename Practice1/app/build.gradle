@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.cookandroid.practice1"
+        applicationId "com.jdragon.practice1"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1

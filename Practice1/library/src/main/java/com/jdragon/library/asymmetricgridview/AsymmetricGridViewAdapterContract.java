@@ -1,4 +1,4 @@
-package com.jdragon.asymmetricgridview.library;
+package com.jdragon.library.asymmetricgridview;
 
 import android.os.Parcelable;
 import android.widget.ListAdapter;

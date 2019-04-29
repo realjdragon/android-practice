@@ -1,4 +1,4 @@
-package com.jdragon.practice1.adapter.base;
+package com.jdragon.library.base.adapter;
 
 import android.widget.AbsListView;
 

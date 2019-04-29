@@ -14,7 +14,7 @@ import com.jdragon.practice1.adapter.item.ItemAdapter;
 import com.jdragon.practice1.api.HomeMainApiClient;
 import com.jdragon.practice1.entity.data.ItemInfo;
 import com.jdragon.practice1.entity.api.home.HomeMainApiResponse;
-import com.jdragon.practice1.fragment.base.BaseFragment;
+import com.jdragon.library.base.fragment.BaseFragment;
 
 import java.util.ArrayList;
 
@@ -68,7 +68,7 @@ public class HomeMainFragment extends BaseFragment {
             public void onRefresh() {
                 setMobileHomeData();
             }
-        });
+        }, R.id.swipe_refresh_layout);
     }
 
     private void setMobileHomeData() {

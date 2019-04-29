@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jdragon.practice1.R;
-import com.jdragon.practice1.cell.base.BaseListCell;
+import com.jdragon.library.base.cell.BaseListCell;
 import com.jdragon.practice1.entity.data.UglyResult;
 
 public class ItemUglyOddCell extends BaseListCell<UglyResult.OddResult> {

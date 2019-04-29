@@ -12,13 +12,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.jdragon.practice1.R;
-import com.jdragon.practice1.adapter.base.EndlessScrollListener;
+import com.jdragon.library.base.adapter.EndlessScrollListener;
 import com.jdragon.practice1.adapter.item.UglyAdapter;
 import com.jdragon.practice1.api.GitHubApiClient;
 import com.jdragon.practice1.entity.api.github.SearchUsersApiResponse;
-import com.jdragon.practice1.entity.base.BaseModel;
+import com.jdragon.library.base.entity.BaseModel;
 import com.jdragon.practice1.entity.data.UglyResult;
-import com.jdragon.practice1.fragment.base.BaseFragment;
+import com.jdragon.library.base.fragment.BaseFragment;
 
 import java.util.ArrayList;
 
@@ -75,7 +75,7 @@ public class GitHubUsersFragment extends BaseFragment {
                 uglyUsers.clear();
                 setMobileHomeData(1);
             }
-        });
+        }, R.id.swipe_refresh_layout);
 
         // 무한 스크롤
         listView.setOnScrollListener(new EndlessScrollListener(2, 2) {

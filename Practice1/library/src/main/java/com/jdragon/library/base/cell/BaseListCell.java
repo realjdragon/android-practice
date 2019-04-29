@@ -1,4 +1,4 @@
-package com.jdragon.practice1.cell.base;
+package com.jdragon.library.base.cell;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.jdragon.practice1.adapter.base.BaseListAdapter;
+import com.jdragon.library.base.adapter.BaseListAdapter;
 
 import java.lang.ref.WeakReference;
 

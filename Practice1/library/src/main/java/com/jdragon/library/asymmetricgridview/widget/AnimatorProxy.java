@@ -1,4 +1,4 @@
-package com.jdragon.asymmetricgridview.library.widget;
+package com.jdragon.library.asymmetricgridview.widget;
 
 import java.lang.ref.WeakReference;
 import java.util.WeakHashMap;

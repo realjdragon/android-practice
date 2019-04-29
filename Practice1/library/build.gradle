@@ -1,11 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         versionCode 23
         versionName "1.0.1"
+        minSdkVersion 15
+        targetSdkVersion 27
     }
 
     compileOptions {
@@ -22,4 +24,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.1'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha01'
 }

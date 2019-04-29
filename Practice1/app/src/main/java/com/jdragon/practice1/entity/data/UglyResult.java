@@ -1,7 +1,7 @@
 package com.jdragon.practice1.entity.data;
 
 import com.jdragon.practice1.entity.api.github.SearchUsersApiResponse;
-import com.jdragon.practice1.entity.base.BaseModel;
+import com.jdragon.library.base.entity.BaseModel;
 
 import java.util.ArrayList;
 import java.util.List;

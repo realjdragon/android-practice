@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.jdragon.practice1.R;
-import com.jdragon.practice1.adapter.base.EndlessScrollListener;
+import com.jdragon.library.base.adapter.EndlessScrollListener;
 import com.jdragon.practice1.adapter.widget.ListAdapter;
 import com.jdragon.practice1.api.GitHubApiClient;
 import com.jdragon.practice1.entity.api.github.SearchUsersApiResponse;
 import com.jdragon.practice1.entity.data.ItemInfo;
-import com.jdragon.practice1.fragment.base.BaseFragment;
-import com.jdragon.asymmetricgridview.library.widget.AsymmetricGridView;
+import com.jdragon.library.base.fragment.BaseFragment;
+import com.jdragon.library.asymmetricgridview.widget.AsymmetricGridView;
 
 import java.util.ArrayList;
 
@@ -69,7 +69,7 @@ public class AsymmetricFragment extends BaseFragment {
                 currentOffset = 0;
                 setMobileHomeData(1);
             }
-        });
+        }, R.id.swipe_refresh_layout);
 
         // 무한 스크롤
         listView.setOnScrollListener(new EndlessScrollListener(2, 2) {
