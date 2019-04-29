@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Practice1</string>
-    <string name="main_title">홈</string>
-    <string name="main_list_name">딜카드 그리드뷰</string>
-    <string name="github_user_list_name">GitHub 회원 리스트</string>
-    <string name="asymmetric_list_name">Asymmetric 리스트</string>
-    <string name="asymmetric_grid_cell"></string>
+    <string name="main_title">Home</string>
+    <string name="main_list_name">Item GridView</string>
+    <string name="github_user_list_name">GitHub ListView</string>
+    <string name="asymmetric_list_name">GitHub AsymmetricGridView</string>
 </resources>

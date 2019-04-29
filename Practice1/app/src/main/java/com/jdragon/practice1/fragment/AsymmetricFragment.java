@@ -8,7 +8,7 @@ import com.jdragon.library.asymmetricgridview.widget.AsymmetricGridView;
 import com.jdragon.library.base.adapter.EndlessScrollListener;
 import com.jdragon.library.base.fragment.BaseFragment;
 import com.jdragon.practice1.R;
-import com.jdragon.practice1.adapter.widget.ListAdapter;
+import com.jdragon.practice1.adapter.widget.AsymmetricListAdapter;
 import com.jdragon.practice1.api.GitHubApiClient;
 import com.jdragon.practice1.entity.api.github.SearchUsersApiResponse;
 import com.jdragon.practice1.entity.data.ItemInfo;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class AsymmetricFragment extends BaseFragment {
     private AsymmetricGridView listView;
 
-    private ListAdapter adapter;
+    private AsymmetricListAdapter adapter;
 
     private ArrayList<ItemInfo> users;
 
@@ -34,13 +34,13 @@ public class AsymmetricFragment extends BaseFragment {
 
     @Override
     public void initUI() {
-        listView = rootView.findViewById(R.id.listView);
+        listView = findView(R.id.listView);
     }
 
     @Override
     public void initData() {
         users = new ArrayList<>();
-        adapter = new ListAdapter(getActivity(), listView, users);
+        adapter = new AsymmetricListAdapter(getActivity(), listView, users);
 
         // API 호출해서 ListView Set
         setMobileHomeData(1);

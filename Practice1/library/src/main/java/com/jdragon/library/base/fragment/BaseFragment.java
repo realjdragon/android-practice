@@ -85,6 +85,8 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
         return (T)rootView.findViewById(resId);
     }
 
+    // 아래부터는 지금은 쓸모 없지만 넣어봄
+
     protected void setOnClickListener(@IdRes int id,View.OnClickListener onClicklistener){
         findView(id).setOnClickListener(onClicklistener);
     }
@@ -158,7 +160,7 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
         fragmentTransaction.commit();
     }
 
-    protected void setSwipeRefreshLayout(SwipeRefreshLayout.OnRefreshListener listener, int id) {
+    protected void setSwipeRefreshLayout(SwipeRefreshLayout.OnRefreshListener listener, @IdRes int id) {
         swipeRefreshLayout = rootView.findViewById(id);
         if (swipeRefreshLayout == null) {
             return;

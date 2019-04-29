@@ -15,14 +15,14 @@ import com.jdragon.library.asymmetricgridview.widget.AsymmetricGridViewAdapter;
 
 import java.util.List;
 
-public class ListAdapter extends AsymmetricGridViewAdapter<ItemInfo> {
+public class AsymmetricListAdapter extends AsymmetricGridViewAdapter<ItemInfo> {
     private class ViewHolder {
         ImageView mImageView;
 
         TextView mTextView;
     }
 
-    public ListAdapter(final Context context, final AsymmetricGridView listView, final List<ItemInfo> items) {
+    public AsymmetricListAdapter(final Context context, final AsymmetricGridView listView, final List<ItemInfo> items) {
         super(context, listView, items);
     }
 
@@ -41,9 +41,9 @@ public class ListAdapter extends AsymmetricGridViewAdapter<ItemInfo> {
             viewHolder.mImageView = convertView.findViewById(R.id.item_image);
             viewHolder.mTextView = convertView.findViewById(R.id.item_name);
 
-            convertView.setTag(R.string.asymmetric_grid_cell, viewHolder);
+            convertView.setTag(R.layout.item_deal_list_row_odd, viewHolder);
         } else {
-            viewHolder = (ViewHolder)convertView.getTag(R.string.asymmetric_grid_cell);
+            viewHolder = (ViewHolder)convertView.getTag(R.layout.item_deal_list_row_odd);
         }
 
         Glide.with(convertView).load(item.getImgUrl()).into(viewHolder.mImageView);

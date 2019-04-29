@@ -35,7 +35,7 @@ public class HomeMainFragment extends BaseFragment {
 
     @Override
     public void initUI() {
-        gridView = rootView.findViewById(R.id.item_deal_grid);
+        gridView = findView(R.id.item_deal_grid);
     }
 
     @Override

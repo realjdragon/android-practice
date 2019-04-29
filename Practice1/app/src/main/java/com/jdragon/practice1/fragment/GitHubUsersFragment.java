@@ -39,7 +39,7 @@ public class GitHubUsersFragment extends BaseFragment {
 
     @Override
     public void initUI() {
-        listView = rootView.findViewById(R.id.item_deal_list);
+        listView = findView(R.id.item_deal_list);
     }
 
     @Override
