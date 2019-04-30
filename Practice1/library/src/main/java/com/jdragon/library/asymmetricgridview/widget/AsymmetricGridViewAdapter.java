@@ -298,6 +298,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         int rowHeight = 1;
         float areaLeft = initialSpaceLeft;
 
+        // 돌면서 공간을 찾아 한 줄을 완성한다.
         while (areaLeft > 0 && currentItem < items.size()) {
             final T item = items.get(currentItem++);
             float itemArea = item.getColumnSpan() * item.getColumnSpan();
@@ -306,12 +307,13 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
                 Log.d(TAG, String.format("item %s in row with height %s consumes %s area", item, rowHeight, itemArea));
 
             if (rowHeight < item.getColumnSpan()) {
-                // restart with double height
+                // 남은 공간에 들어갈 수 없으면 다음 줄에서 시작한다.
                 itemsThatFit.clear();
                 rowHeight = item.getColumnSpan();
                 currentItem = 0;
                 areaLeft = initialSpaceLeft * item.getColumnSpan();
             } else if (areaLeft >= itemArea) {
+                // 공간이 있으면 넣는다.
                 areaLeft -= itemArea;
                 itemsThatFit.add(item);
             } else if (!listView.isAllowReordering()) {
@@ -327,7 +329,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         @Override
         @SafeVarargs
         protected final List<RowInfo<T>> doInBackground(final List<T>... params) {
-            return calculateItemsPerRow(0, params[0]);
+            return calculateItemsPerRow(params[0]);
         }
 
         @Override
@@ -343,7 +345,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
             notifyDataSetChanged();
         }
 
-        private List<RowInfo<T>> calculateItemsPerRow(int currentRow, final List<T> itemsToAdd) {
+        private List<RowInfo<T>> calculateItemsPerRow(final List<T> itemsToAdd) {
             List<RowInfo<T>> rows = new ArrayList<>();
 
             while (!itemsToAdd.isEmpty()) {
@@ -357,10 +359,10 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
                 }
 
                 for (T anItemsThatFit : itemsThatFit)
+                    // RowInfo로 완성된 item들은 추가대상 리스트 itemsToAdd에서 제거한다.
                     itemsToAdd.remove(anItemsThatFit);
 
                 rows.add(stuffThatFit);
-                currentRow++;
             }
 
             return rows;
