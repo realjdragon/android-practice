@@ -23,8 +23,6 @@ public class AsymmetricFragment extends BaseFragment {
 
     private AsymmetricListAdapter adapter;
 
-    private ArrayList<ItemInfo> users;
-
     private ArrayList<ItemInfo> lastResult;
 
     @Override
@@ -39,8 +37,7 @@ public class AsymmetricFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        users = new ArrayList<>();
-        adapter = new AsymmetricListAdapter(getActivity(), listView, users);
+        adapter = new AsymmetricListAdapter(getActivity(), listView, new ArrayList<ItemInfo>());
         listView.setAdapter(adapter);
 
         // API 호출해서 ListView Set
@@ -53,7 +50,7 @@ public class AsymmetricFragment extends BaseFragment {
         setSwipeRefreshLayout(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                users.clear();
+                adapter.setItems(new ArrayList<ItemInfo>());
                 setMobileHomeData(1);
             }
         }, R.id.swipe_refresh_layout);
@@ -113,7 +110,6 @@ public class AsymmetricFragment extends BaseFragment {
             }
 
             adapter.appendItems(lastResult);
-
         }
     }
 
