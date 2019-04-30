@@ -79,9 +79,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
     @Override
     public View getView(final int position, final View convertView, final ViewGroup parent) {
-        if (listView.isDebugging())
-            Log.d(TAG, "getView(" + String.valueOf(position) + ")");
-
         LinearLayout layout = findOrInitializeLayout(convertView);
 
         final RowInfo<T> rowInfo = itemsPerRow.get(position);
@@ -139,11 +136,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
             } else {
                 break;
             }
-        }
-
-        if (listView.isDebugging() && position % 20 == 0) {
-            Log.d(TAG, linearLayoutPool.getStats("LinearLayout"));
-            Log.d(TAG, viewPool.getStats("Views"));
         }
 
         return layout;
@@ -223,9 +215,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         if (rowInfo != null) {
             final float spaceLeftInLastRow = rowInfo.getSpaceLeft();
 
-            if (listView.isDebugging())
-                Log.d(TAG, "Space left in last row: " + spaceLeftInLastRow);
-
             // Try to add new items into the last row, if there is any space left
             if (spaceLeftInLastRow > 0) {
 
@@ -303,9 +292,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
             final T item = items.get(currentItem++);
             float itemArea = item.getColumnSpan() * item.getColumnSpan();
 
-            if (listView.isDebugging())
-                Log.d(TAG, String.format("item %s in row with height %s consumes %s area", item, rowHeight, itemArea));
-
             if (rowHeight < item.getColumnSpan()) {
                 // 남은 공간에 들어갈 수 없으면 다음 줄에서 시작한다.
                 itemsThatFit.clear();
@@ -336,11 +322,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         protected void onPostExecute(List<RowInfo<T>> rows) {
             for (RowInfo<T> row : rows)
                 itemsPerRow.put(getRowCount(), row);
-
-            if (listView.isDebugging()) {
-                for (Map.Entry<Integer, RowInfo<T>> e : itemsPerRow.entrySet())
-                    Log.d(TAG, "row: " + e.getKey() + ", items: " + e.getValue().getItems().size());
-            }
 
             notifyDataSetChanged();
         }

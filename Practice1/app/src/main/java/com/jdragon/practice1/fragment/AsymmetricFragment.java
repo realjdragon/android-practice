@@ -41,6 +41,7 @@ public class AsymmetricFragment extends BaseFragment {
     public void initData() {
         users = new ArrayList<>();
         adapter = new AsymmetricListAdapter(getActivity(), listView, users);
+        listView.setAdapter(adapter);
 
         // API 호출해서 ListView Set
         setMobileHomeData(1);
@@ -76,7 +77,7 @@ public class AsymmetricFragment extends BaseFragment {
                     @Override
                     public void onResponse(SearchUsersApiResponse response) {
                         try {
-                            processGetUsersResponse(response, page == 1);
+                            processGetUsersResponse(response);
                         }
                         catch (Exception e){
                             e.printStackTrace();
@@ -99,7 +100,7 @@ public class AsymmetricFragment extends BaseFragment {
         );
     }
 
-    private void processGetUsersResponse(SearchUsersApiResponse response, boolean isFirst) {
+    private void processGetUsersResponse(SearchUsersApiResponse response) {
         ArrayList<SearchUsersApiResponse.User> usersResponse = response.getUsers();
 
         if (usersResponse != null && usersResponse.size() > 0) {
@@ -109,11 +110,6 @@ public class AsymmetricFragment extends BaseFragment {
                 colSpan = getColSpanByPosition(i);
                 final ItemInfo item = new ItemInfo(usersResponse.get(i).getAvatarUrl(), usersResponse.get(i).getUrl(), colSpan);
                 lastResult.add(item);
-            }
-
-            if (isFirst) {
-                listView.setRequestedColumnCount(2);
-                listView.setAdapter(adapter);
             }
 
             adapter.appendItems(lastResult);
