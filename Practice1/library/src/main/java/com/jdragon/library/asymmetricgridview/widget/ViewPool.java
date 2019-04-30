@@ -1,12 +1,10 @@
 package com.jdragon.library.asymmetricgridview.widget;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.view.View;
 
 import java.util.Stack;
 
-class ViewPool<T extends View> implements Parcelable {
+class ViewPool<T extends View> {
 
     static class PoolStats {
         int size = 0;
@@ -61,15 +59,5 @@ class ViewPool<T extends View> implements Parcelable {
 
     String getStats(String name) {
         return stats.getStats(name);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(final Parcel dest, final int flags) {
-
     }
 }

@@ -1,7 +1,6 @@
 package com.jdragon.library.asymmetricgridview.model;
 
-import android.os.Parcelable;
 
-public interface AsymmetricItem extends Parcelable {
+public interface AsymmetricItem {
     public int getColumnSpan();
 }

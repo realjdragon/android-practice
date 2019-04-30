@@ -2,8 +2,6 @@ package com.jdragon.library.asymmetricgridview.widget;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -149,34 +147,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         }
 
         return layout;
-    }
-
-    public Parcelable saveState() {
-        final Bundle bundle = new Bundle();
-        bundle.putInt("totalItems", items.size());
-
-        for (int i = 0; i < items.size(); i++)
-            bundle.putParcelable("item_" + i, items.get(i));
-
-        return bundle;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void restoreState(final Parcelable state) {
-        final Bundle bundle = (Bundle) state;
-
-        if (bundle != null) {
-            bundle.setClassLoader(getClass().getClassLoader());
-
-            final int totalItems = bundle.getInt("totalItems");
-            final List<T> tmpItems = new ArrayList<>();
-
-            for (int i = 0; i < totalItems; i++)
-                tmpItems.add((T) bundle.getParcelable("item_" + i));
-
-            // will trigger recalculateItemsPerRow()
-            setItems(tmpItems);
-        }
     }
 
     @SuppressWarnings("MagicConstant")
