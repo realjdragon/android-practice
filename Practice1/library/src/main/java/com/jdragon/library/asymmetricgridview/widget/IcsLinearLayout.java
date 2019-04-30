@@ -30,7 +30,7 @@ public class IcsLinearLayout extends LinearLayout {
     /**
      * Don't show any dividers.
      */
-    public static final int SHOW_DIVIDER_NONE = 0;
+    public static final int adjacent = 0;
     /**
      * Show a divider at the beginning of the group.
      */

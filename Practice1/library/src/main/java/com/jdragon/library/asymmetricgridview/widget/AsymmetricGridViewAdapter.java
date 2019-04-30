@@ -106,7 +106,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
                 continue;
             }
 
-            // Is there enough space in this column to accommodate currentItem?
+            // 들어갈 자리가 있으면
             if (spaceLeftInColumn >= currentItem.getColumnSpan()) {
                 rowItems.remove(currentItem);
 
@@ -131,7 +131,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
                 childLayout.addView(v);
             } else if (currentIndex < rowItems.size() - 1) {
-                // Try again with next item
+                // 아직 자리가 남았네..
                 currentIndex++;
             } else {
                 break;
@@ -147,18 +147,18 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
         if (convertView == null || !(convertView instanceof IcsLinearLayout)) {
             layout = new IcsLinearLayout(context, null);
-            if (listView.isDebugging())
-                layout.setBackgroundColor(Color.parseColor("#83F27B"));
 
+            // divider를 보여주는 방식 결정
             layout.setShowDividers(IcsLinearLayout.SHOW_DIVIDER_MIDDLE);
+            // divider drawable 세팅
             layout.setDividerDrawable(context.getResources().getDrawable(R.drawable.item_divider_horizontal));
-
+            // layout_width, layout_height 세팅
             layout.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
                     AbsListView.LayoutParams.WRAP_CONTENT));
         } else
             layout = (IcsLinearLayout) convertView;
 
-        // Clear all layout children before starting
+        // children 제거
         for (int j = 0; j < layout.getChildCount(); j++) {
             IcsLinearLayout tempChild = (IcsLinearLayout) layout.getChildAt(j);
             linearLayoutPool.put(tempChild);
@@ -178,9 +178,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         if (childLayout == null) {
             childLayout = linearLayoutPool.get();
             childLayout.setOrientation(LinearLayout.VERTICAL);
-
-            if (listView.isDebugging())
-                childLayout.setBackgroundColor(Color.parseColor("#837BF2"));
 
             childLayout.setShowDividers(IcsLinearLayout.SHOW_DIVIDER_MIDDLE);
             childLayout.setDividerDrawable(context.getResources().getDrawable(R.drawable.item_divider_vertical));
