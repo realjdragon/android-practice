@@ -147,12 +147,4 @@ public class AsymmetricGridView extends ListView {
             gridAdapter.notifyDataSetChanged();
         }
     }
-
-    public boolean isDebugging() {
-        return debugging;
-    }
-
-    public void setDebugging(boolean debugging) {
-        this.debugging = debugging;
-    }
 }

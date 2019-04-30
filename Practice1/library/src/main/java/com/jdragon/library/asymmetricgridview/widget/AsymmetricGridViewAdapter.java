@@ -1,8 +1,6 @@
 package com.jdragon.library.asymmetricgridview.widget;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -61,8 +59,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
     protected int getRowHeight(int rowSpan) {
         final int rowHeight = listView.getColumnWidth() * rowSpan;
-        // when the item spans multiple rows, we need to account for the vertical padding
-        // and add that to the total final height
+
         return rowHeight + ((rowSpan - 1) * listView.getRequestedVerticalSpacing());
     }
 
@@ -72,8 +69,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
     protected int getRowWidth(int columnSpan) {
         final int rowWidth = listView.getColumnWidth() * columnSpan;
-        // when the item spans multiple columns, we need to account for the horizontal padding
-        // and add that to the total final width
+
         return Math.min(rowWidth + ((columnSpan - 1) * listView.getRequestedHorizontalSpacing()), Utils.getScreenWidth(getContext()));
     }
 
@@ -85,12 +81,10 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         final List<T> rowItems = new ArrayList<>();
         rowItems.addAll(rowInfo.getItems());
 
-        // Index to control the current position
-        // of the current column in this row
+        // 현재 행에서 열 인덱스
         int columnIndex = 0;
 
-        // Index to control the current position
-        // in the array of all the items available for this row
+        // 아이템 리스트에서 인덱스
         int currentIndex = 0;
 
         int spaceLeftInColumn = rowInfo.getRowHeight();
@@ -99,7 +93,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
             final T currentItem = rowItems.get(currentIndex);
 
             if (spaceLeftInColumn == 0) {
-                // No more space in this column. Move to next one
+                // 이 컬럼에 자리가 없으니 다음 컬럼으로
                 columnIndex++;
                 currentIndex = 0;
                 spaceLeftInColumn = rowInfo.getRowHeight();
@@ -129,6 +123,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
                 v.setLayoutParams(layoutParams);
 
+                // v가 하나의 item
                 childLayout.addView(v);
             } else if (currentIndex < rowItems.size() - 1) {
                 // 아직 자리가 남았네..
@@ -212,7 +207,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         if (rowInfo != null) {
             final float spaceLeftInLastRow = rowInfo.getSpaceLeft();
 
-            // Try to add new items into the last row, if there is any space left
             if (spaceLeftInLastRow > 0) {
 
                 for (final T i : rowInfo.getItems())
@@ -250,7 +244,8 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
     @Override
     public int getCount() {
-        // Returns the row count for ListView display purposes
+        // 꼭 row count 리턴해줘야함.
+        // item이 더 많더라도 한 row에 getView 1회이기 때문
         return getRowCount();
     }
 
@@ -307,6 +302,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         return new RowInfo<>(rowHeight, itemsThatFit, areaLeft);
     }
 
+    // 아이템들을 RowInfo 형태로 바꿔둔다.
     class ProcessRowsTask extends AsyncTaskCompat<List<T>, Void, List<RowInfo<T>>> {
 
         @Override
@@ -331,8 +327,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
                 final List<T> itemsThatFit = stuffThatFit.getItems();
                 if (itemsThatFit.isEmpty()) {
-                    // we can't fit a single item inside a row.
-                    // bail out.
                     break;
                 }
 
