@@ -58,7 +58,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
     public abstract View getActualView(final int position, final View convertView, final ViewGroup parent);
 
     protected int getRowHeight(final AsymmetricItem item) {
-        return getRowHeight(item.getRowSpan());
+        return getRowHeight(item.getColumnSpan());
     }
 
     protected int getRowHeight(int rowSpan) {
@@ -112,7 +112,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
             }
 
             // Is there enough space in this column to accommodate currentItem?
-            if (spaceLeftInColumn >= currentItem.getRowSpan()) {
+            if (spaceLeftInColumn >= currentItem.getColumnSpan()) {
                 rowItems.remove(currentItem);
 
                 int index = items.indexOf(currentItem);
@@ -123,7 +123,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
                 v.setOnClickListener(this);
                 v.setOnLongClickListener(this);
 
-                spaceLeftInColumn -= currentItem.getRowSpan();
+                spaceLeftInColumn -= currentItem.getColumnSpan();
                 currentIndex = 0;
 
                 v.setLayoutParams(new LinearLayout.LayoutParams(getRowWidth(currentItem),
@@ -330,17 +330,17 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
         while (areaLeft > 0 && currentItem < items.size()) {
             final T item = items.get(currentItem++);
-            float itemArea = item.getRowSpan() * item.getColumnSpan();
+            float itemArea = item.getColumnSpan() * item.getColumnSpan();
 
             if (listView.isDebugging())
                 Log.d(TAG, String.format("item %s in row with height %s consumes %s area", item, rowHeight, itemArea));
 
-            if (rowHeight < item.getRowSpan()) {
+            if (rowHeight < item.getColumnSpan()) {
                 // restart with double height
                 itemsThatFit.clear();
-                rowHeight = item.getRowSpan();
+                rowHeight = item.getColumnSpan();
                 currentItem = 0;
-                areaLeft = initialSpaceLeft * item.getRowSpan();
+                areaLeft = initialSpaceLeft * item.getColumnSpan();
             } else if (areaLeft >= itemArea) {
                 areaLeft -= itemArea;
                 itemsThatFit.add(item);

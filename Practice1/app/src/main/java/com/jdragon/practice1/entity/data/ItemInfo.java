@@ -9,7 +9,6 @@ import com.jdragon.library.asymmetricgridview.model.AsymmetricItem;
 // 상품 딜
 public class ItemInfo extends BaseModel implements AsymmetricItem {
     private int columnSpan;
-    private int rowSpan;
 
     // 상품 이미지 경로
     String imgUrl;
@@ -17,11 +16,16 @@ public class ItemInfo extends BaseModel implements AsymmetricItem {
     // 상품명
     String name;
 
-    public ItemInfo(String imgUrl, String name, final int columnSpan, final int rowSpan) {
+    public ItemInfo(String imgUrl, String name) {
+        this.imgUrl = imgUrl;
+        this.name= name;
+        this.columnSpan = 1;
+    }
+
+    public ItemInfo(String imgUrl, String name, final int columnSpan) {
         this.imgUrl = imgUrl;
         this.name= name;
         this.columnSpan = columnSpan;
-        this.rowSpan = rowSpan;
     }
 
     public ItemInfo(final Parcel in) {
@@ -51,24 +55,17 @@ public class ItemInfo extends BaseModel implements AsymmetricItem {
     }
 
     @Override
-    public int getRowSpan() {
-        return rowSpan;
-    }
-
-    @Override
     public int describeContents() {
         return 0;
     }
 
     private void readFromParcel(final Parcel in) {
         columnSpan = in.readInt();
-        rowSpan = in.readInt();
     }
 
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeInt(columnSpan);
-        dest.writeInt(rowSpan);
     }
 
     public static final Parcelable.Creator<ItemInfo> CREATOR = new Parcelable.Creator<ItemInfo>() {

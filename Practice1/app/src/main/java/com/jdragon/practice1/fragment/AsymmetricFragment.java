@@ -104,10 +104,10 @@ public class AsymmetricFragment extends BaseFragment {
 
         if (usersResponse != null && usersResponse.size() > 0) {
             lastResult = new ArrayList<>();
-            int colSpan, rowSpan;
+            int colSpan;
             for (int i = 0; i < usersResponse.size(); i++) {
-                colSpan = rowSpan = getColSpanByPosition(i);
-                final ItemInfo item = new ItemInfo(usersResponse.get(i).getAvatarUrl(), usersResponse.get(i).getUrl(), colSpan, rowSpan);
+                colSpan = getColSpanByPosition(i);
+                final ItemInfo item = new ItemInfo(usersResponse.get(i).getAvatarUrl(), usersResponse.get(i).getUrl(), colSpan);
                 lastResult.add(item);
             }
 
