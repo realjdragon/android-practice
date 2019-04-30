@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.LinearLayout;
 
 /**
  * A simple extension of a regular linear layout that supports the divider API
@@ -16,7 +17,7 @@ import android.view.View;
  * same orientation as the layout you should wrap the child in a simple
  * {@link android.widget.FrameLayout} so it can receive the margin.
  */
-public class IcsLinearLayout extends NineLinearLayout {
+public class IcsLinearLayout extends LinearLayout {
     private static final int[] R_styleable_LinearLayout = new int[] {
         /* 0 */ android.R.attr.divider,
         /* 2 */ android.R.attr.showDividers,
