@@ -126,7 +126,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
                 // v가 하나의 item
                 childLayout.addView(v);
             } else if (currentIndex < rowItems.size() - 1) {
-                // 아직 자리가 남았네..
+                // 이런 경우가 있나?
                 currentIndex++;
             } else {
                 break;
