@@ -99,6 +99,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
                 int index = items.indexOf(currentItem);
                 final LinearLayout childLayout = findOrInitializeChildLayout(layout, columnIndex);
+                // 마치 여기서 getView가 일어난 것처럼..
                 final View childConvertView = viewPool.get();
                 final View v = getActualView(index, childConvertView, parent);
                 v.setTag(currentItem);
