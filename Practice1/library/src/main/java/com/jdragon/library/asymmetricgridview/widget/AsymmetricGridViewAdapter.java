@@ -37,17 +37,13 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
         super(context, 0, items);
 
-        // 뭐니 이게
         this.linearLayoutPool = new ViewPool<>(new LinearLayoutPoolObjectFactory(context));
-        // 이게 진짜 리스트
         this.items = items;
         this.context = context;
-        // 아시메트릭 그리드뷰
+        // 리스트 뷰의 실제 크기를 구해서 사용하기 때문에 특이하게 listview를 인자로 받고 있음
         this.listView = listView;
     }
 
-    // 상속받아서 이거만 구현해서 사용하나본데
-    // 이 메서드가 호출될때는 이미 랜덤으로 그리드가 정해진 상태임...
     public abstract View getActualView(final int position, final View convertView, final ViewGroup parent);
 
     protected int getRowHeight(final AsymmetricItem item) {
@@ -130,14 +126,14 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
     @SuppressWarnings("MagicConstant")
     private IcsLinearLayout findOrInitializeLayout(final View convertView) {
-        // 가로 divider
+        // 세로 divider
         IcsLinearLayout layout;
 
         if (convertView == null || !(convertView instanceof IcsLinearLayout)) {
             layout = new IcsLinearLayout(context, null);
 
             // divider를 보여주는 방식 결정
-            layout.setShowDividers(IcsLinearLayout.SHOW_DIVIDER_MIDDLE);
+            layout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
             // divider drawable 세팅
             layout.setDividerDrawable(context.getResources().getDrawable(R.drawable.item_divider_horizontal));
             // layout_width, layout_height 세팅
@@ -161,14 +157,14 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
     @SuppressWarnings("MagicConstant")
     private IcsLinearLayout findOrInitializeChildLayout(final LinearLayout parentLayout, final int childIndex) {
-        // 세로 divider
+        // 가로 divider
         IcsLinearLayout childLayout = (IcsLinearLayout) parentLayout.getChildAt(childIndex);
 
         if (childLayout == null) {
             childLayout = linearLayoutPool.get();
             childLayout.setOrientation(LinearLayout.VERTICAL);
 
-            childLayout.setShowDividers(IcsLinearLayout.SHOW_DIVIDER_MIDDLE);
+            childLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
             childLayout.setDividerDrawable(context.getResources().getDrawable(R.drawable.item_divider_vertical));
 
             childLayout.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.WRAP_CONTENT,

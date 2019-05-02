@@ -32,7 +32,7 @@
             android:textSize="10sp"
             android:textStyle="bold"
             android:gravity="center_vertical"
-            android:background="#ffffff"
+            android:background="#EBD6B6"
             tools:text="item_name"/>
 
     </LinearLayout>
@@ -59,7 +59,7 @@
         <ImageView android:id="@+id/item_image2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#EBD6B6"
+            android:background="#ffffff"
             android:adjustViewBounds="true"
             tools:layout_height="300dp"/>
 

@@ -21,7 +21,7 @@
         android:textSize="10sp"
         android:textStyle="bold"
         android:gravity="center_vertical"
-        android:background="#ffffff"
+        android:background="#EBD6B6"
         tools:text="item_name"/>
 
 </LinearLayout>
