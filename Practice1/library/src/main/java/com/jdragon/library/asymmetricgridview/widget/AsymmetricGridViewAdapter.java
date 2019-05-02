@@ -116,12 +116,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
                 currentIndex = 0;
 
                 v.setLayoutParams(new LinearLayout.LayoutParams(getRowWidth(currentItem),
-                        getRowHeight(currentItem)));
-
-                ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
-                layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-
-                v.setLayoutParams(layoutParams);
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
 
                 // v가 하나의 item
                 childLayout.addView(v);
@@ -138,6 +133,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
     @SuppressWarnings("MagicConstant")
     private IcsLinearLayout findOrInitializeLayout(final View convertView) {
+        // 가로 divider
         IcsLinearLayout layout;
 
         if (convertView == null || !(convertView instanceof IcsLinearLayout)) {
@@ -168,6 +164,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
     @SuppressWarnings("MagicConstant")
     private IcsLinearLayout findOrInitializeChildLayout(final LinearLayout parentLayout, final int childIndex) {
+        // 세로 divider
         IcsLinearLayout childLayout = (IcsLinearLayout) parentLayout.getChildAt(childIndex);
 
         if (childLayout == null) {
