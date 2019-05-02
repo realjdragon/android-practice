@@ -92,7 +92,7 @@ public class GitHubUsersFragment extends BaseFragment {
                             e.printStackTrace();
                         }
                         finally {
-                            if (getActivity() == null || getActivity().isFinishing() || !isAdded()) {
+                            if (isFinishing()) {
                                 return;
                             }
 

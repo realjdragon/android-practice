@@ -1,7 +1,6 @@
 package com.jdragon.library.base.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,16 +21,6 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
     protected ViewGroup container;
 
     protected View rootView;
-
-    protected boolean isStop;
-
-    public ViewGroup getContainer(){
-        return container;
-    }
-
-    public View getActivityRootView(){
-        return getActivity().findViewById(android.R.id.content);
-    }
 
     @Nullable
     @Override
@@ -59,13 +48,11 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
     @Override
     public void onResume() {
         super.onResume();
-        isStop = false;
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        isStop = true;
     }
 
     protected View inflate(@LayoutRes int id){
@@ -80,58 +67,8 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
         return (T)rootView.findViewById(resId);
     }
 
-    // 아래부터는 지금은 쓸모 없지만 넣어봄
-
-    protected void setOnClickListener(@IdRes int id,View.OnClickListener onClicklistener){
-        findView(id).setOnClickListener(onClicklistener);
-    }
-
-    protected Intent getIntent(){
-        return getActivity().getIntent();
-    }
-
-    protected Intent getIntent(Class<?> cls){
-        return new Intent(context,cls);
-    }
-
-    protected Intent getIntent(Class<?> cls,int flags){
-        Intent intent = getIntent(cls);
-        intent.setFlags(flags);
-        return intent;
-    }
-
-    protected void startActivity(Class<?> cls){
-        startActivity(getIntent(cls));
-    }
-
-    protected void startActivity(Class<?> cls,int flags){
-        startActivity(getIntent(cls,flags));
-    }
-
-    protected void startActivityFinish(Class<?> cls){
-        startActivity(cls);
-        finish();
-    }
-
-    protected void startActivityFinish(Class<?> cls,int flags){
-        startActivity(cls,flags);
-        finish();
-    }
-
-    protected void finish(){
-        getActivity().finish();
-    }
-
-    protected void setResult(int resultCode){
-        setResult(resultCode,getIntent());
-    }
-
-    protected void setResult(int resultCode,Intent intent){
-        getActivity().setResult(resultCode,intent);
-    }
-
-    protected void setIntent(Intent newIntent){
-        getActivity().setIntent(newIntent);
+    protected boolean isFinishing(){
+        return getActivity() == null || getActivity().isFinishing() || !isAdded();
     }
 
     protected void setSwipeRefreshLayout(SwipeRefreshLayout.OnRefreshListener listener, @IdRes int id) {
