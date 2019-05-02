@@ -1,5 +1,9 @@
 package com.jdragon.practice1.fragment;
 
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
+
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Response;
@@ -54,6 +58,14 @@ public class AsymmetricFragment extends BaseFragment {
                 setMobileHomeData(1);
             }
         }, R.id.swipe_refresh_layout);
+
+        // 아이템 클릭
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), adapter.getItem(position).getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // 무한 스크롤
         listView.setOnScrollListener(new EndlessScrollListener(2, 2) {

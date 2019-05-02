@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 
 import com.jdragon.library.R;
 import com.jdragon.library.asymmetricgridview.AsymmetricGridViewAdapterContract;
-import com.jdragon.library.asymmetricgridview.AsyncTaskCompat;
 import com.jdragon.library.asymmetricgridview.Utils;
 import com.jdragon.library.asymmetricgridview.model.AsymmetricItem;
 
@@ -24,7 +23,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         View.OnLongClickListener,
         AsymmetricGridViewAdapterContract {
 
-    private static final String TAG = "AsymmetricGridViewAdapter";
     protected final AsymmetricGridView listView;
     protected final Context context;
     protected final List<T> items;
@@ -32,7 +30,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
     private Map<Integer, RowInfo<T>> itemsPerRow = new HashMap<>();
     private final ViewPool<IcsLinearLayout> linearLayoutPool;
     private final ViewPool<View> viewPool = new ViewPool<>();
-    private ProcessRowsTask asyncTask;
 
     public AsymmetricGridViewAdapter(final Context context,
                                      final AsymmetricGridView listView,
@@ -221,8 +218,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
             }
         }
 
-        asyncTask = new ProcessRowsTask();
-        asyncTask.executeSerially(newItems);
+        calculateItemsPerRow(newItems);
     }
 
     @Override
@@ -252,9 +248,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
     @SuppressWarnings("unchecked")
     public void recalculateItemsPerRow() {
-        if (asyncTask != null)
-            asyncTask.cancel(true);
-
         linearLayoutPool.clear();
         viewPool.clear();
         itemsPerRow.clear();
@@ -262,8 +255,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         final List<T> itemsToAdd = new ArrayList<>();
         itemsToAdd.addAll(items);
 
-        asyncTask = new ProcessRowsTask();
-        asyncTask.executeSerially(itemsToAdd);
+        calculateItemsPerRow(itemsToAdd);
     }
 
     private RowInfo<T> calculateItemsForRow(final List<T> items) {
@@ -300,42 +292,28 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
     }
 
     // 아이템들을 RowInfo 형태로 바꿔둔다.
-    class ProcessRowsTask extends AsyncTaskCompat<List<T>, Void, List<RowInfo<T>>> {
+    private void calculateItemsPerRow(final List<T> itemsToAdd) {
+        List<RowInfo<T>> rows = new ArrayList<>();
 
-        @Override
-        @SafeVarargs
-        protected final List<RowInfo<T>> doInBackground(final List<T>... params) {
-            return calculateItemsPerRow(params[0]);
-        }
+        while (!itemsToAdd.isEmpty()) {
+            final RowInfo<T> stuffThatFit = calculateItemsForRow(itemsToAdd);
 
-        @Override
-        protected void onPostExecute(List<RowInfo<T>> rows) {
-            for (RowInfo<T> row : rows)
-                itemsPerRow.put(getRowCount(), row);
-
-            notifyDataSetChanged();
-        }
-
-        private List<RowInfo<T>> calculateItemsPerRow(final List<T> itemsToAdd) {
-            List<RowInfo<T>> rows = new ArrayList<>();
-
-            while (!itemsToAdd.isEmpty()) {
-                final RowInfo<T> stuffThatFit = calculateItemsForRow(itemsToAdd);
-
-                final List<T> itemsThatFit = stuffThatFit.getItems();
-                if (itemsThatFit.isEmpty()) {
-                    break;
-                }
-
-                for (T anItemsThatFit : itemsThatFit)
-                    // RowInfo로 완성된 item들은 추가대상 리스트 itemsToAdd에서 제거한다.
-                    itemsToAdd.remove(anItemsThatFit);
-
-                rows.add(stuffThatFit);
+            final List<T> itemsThatFit = stuffThatFit.getItems();
+            if (itemsThatFit.isEmpty()) {
+                break;
             }
 
-            return rows;
+            for (T anItemsThatFit : itemsThatFit)
+                // RowInfo로 완성된 item들은 추가대상 리스트 itemsToAdd에서 제거한다.
+                itemsToAdd.remove(anItemsThatFit);
+
+            rows.add(stuffThatFit);
         }
+
+        for (RowInfo<T> row : rows)
+            itemsPerRow.put(getRowCount(), row);
+
+        notifyDataSetChanged();
     }
 
 }
