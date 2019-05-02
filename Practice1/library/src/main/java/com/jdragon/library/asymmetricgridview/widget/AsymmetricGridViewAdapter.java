@@ -283,8 +283,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
                 // 공간이 있으면 넣는다.
                 areaLeft -= itemArea;
                 itemsThatFit.add(item);
-            } else if (!listView.isAllowReordering()) {
-                break;
             }
         }
 

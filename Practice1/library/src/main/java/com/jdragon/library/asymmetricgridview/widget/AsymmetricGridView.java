@@ -14,7 +14,6 @@ import com.jdragon.library.asymmetricgridview.Utils;
 public class AsymmetricGridView extends ListView {
 
     private static final int DEFAULT_COLUMN_COUNT = 2;
-    private static final String TAG = "MultiColumnListView";
     protected int numColumns = DEFAULT_COLUMN_COUNT;
     protected final Rect padding;
     protected int defaultPadding;
@@ -22,7 +21,6 @@ public class AsymmetricGridView extends ListView {
     protected int requestedVerticalSpacing;
     protected int requestedColumnWidth;
     protected int requestedColumnCount;
-    protected boolean allowReordering;
     protected boolean debugging = false;
     protected AsymmetricGridViewAdapterContract gridAdapter;
     protected OnItemClickListener onItemClickListener;
@@ -42,7 +40,6 @@ public class AsymmetricGridView extends ListView {
                 @Override
                 public boolean onPreDraw() {
                     getViewTreeObserver().removeOnPreDrawListener(this);
-                    determineColumns();
                     if (gridAdapter != null)
                         gridAdapter.notifyDataSetChanged();
                     return false;
@@ -99,6 +96,7 @@ public class AsymmetricGridView extends ListView {
     @Override
     protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        // 여기서 컬럼 수 결정
         determineColumns();
     }
 
@@ -109,10 +107,10 @@ public class AsymmetricGridView extends ListView {
         if (requestedColumnWidth > 0) {
             numColumns = (availableSpace + requestedHorizontalSpacing) /
                     (requestedColumnWidth + requestedHorizontalSpacing);
+            // 대부분 컬럼 수를 입력해서 사용할 것
         } else if (requestedColumnCount > 0) {
             numColumns = requestedColumnCount;
         } else {
-            // Default to 2 columns
             numColumns = DEFAULT_COLUMN_COUNT;
         }
 
@@ -128,23 +126,17 @@ public class AsymmetricGridView extends ListView {
         return numColumns;
     }
 
+    /**
+     * @return 한 컬럼의 가로 길이.
+     */
     public int getColumnWidth() {
         return (getAvailableSpace() - ((numColumns - 1) * requestedHorizontalSpacing)) / numColumns;
     }
 
+    /**
+     * @return listview의 폭에서 양쪽 padding을 뺀 값. 컬럼과 divider가 들어갈 수 있는 공간
+     */
     public int getAvailableSpace() {
         return getMeasuredWidth() - padding.left - padding.right;
-    }
-
-    public boolean isAllowReordering() {
-        return allowReordering;
-    }
-
-    public void setAllowReordering(final boolean allowReordering) {
-        this.allowReordering = allowReordering;
-        if (gridAdapter != null) {
-            gridAdapter.recalculateItemsPerRow();
-            gridAdapter.notifyDataSetChanged();
-        }
     }
 }
