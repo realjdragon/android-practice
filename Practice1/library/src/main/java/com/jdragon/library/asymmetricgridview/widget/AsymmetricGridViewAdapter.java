@@ -1,6 +1,7 @@
 package com.jdragon.library.asymmetricgridview.widget;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -112,7 +113,7 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
                 v.setLayoutParams(new LinearLayout.LayoutParams(getRowWidth(currentItem),
                         ViewGroup.LayoutParams.WRAP_CONTENT));
 
-                // v가 하나의 item
+                // 세로로 레이아웃이 붙음
                 childLayout.addView(v);
             } else if (currentIndex < rowItems.size() - 1) {
                 // 이런 경우가 있나?
@@ -166,10 +167,12 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
             childLayout.setOrientation(LinearLayout.VERTICAL);
 
             childLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+
             childLayout.setDividerDrawable(context.getResources().getDrawable(R.drawable.item_divider_vertical));
 
             childLayout.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.WRAP_CONTENT,
                     AbsListView.LayoutParams.MATCH_PARENT));
+            // 가로로 레이아웃이 붙음
             parentLayout.addView(childLayout);
         }
 
