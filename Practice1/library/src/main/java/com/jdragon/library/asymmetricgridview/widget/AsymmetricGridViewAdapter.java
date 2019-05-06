@@ -115,9 +115,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
 
                 // 세로로 레이아웃이 붙음
                 childLayout.addView(v);
-            } else if (currentIndex < rowItems.size() - 1) {
-                // 이런 경우가 있나?
-                currentIndex++;
             } else {
                 break;
             }
@@ -192,32 +189,6 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
     public void appendItems(List<T> newItems) {
         items.addAll(newItems);
 
-        RowInfo<T> rowInfo = null;
-        final int lastRow = getRowCount() - 1;
-        if (lastRow >= 0)
-            rowInfo = itemsPerRow.get(lastRow);
-
-        // 추가로 더 붙일 때 마지막 row를 구한 다음 남은 공간이 있는지 본다..
-        if (rowInfo != null) {
-            final float spaceLeftInLastRow = rowInfo.getSpaceLeft();
-
-            if (spaceLeftInLastRow > 0) {
-
-                for (final T i : rowInfo.getItems())
-                    newItems.add(0, i);
-
-                final RowInfo<T> stuffThatFit = calculateItemsForRow(newItems);
-                final List<T> itemsThatFit = stuffThatFit.getItems();
-
-                if (!itemsThatFit.isEmpty()) {
-                    for (T anItemsThatFit : itemsThatFit) newItems.remove(anItemsThatFit);
-
-                    itemsPerRow.put(lastRow, stuffThatFit);
-                    notifyDataSetChanged();
-                }
-            }
-        }
-
         calculateItemsPerRow(newItems);
     }
 
@@ -258,58 +229,30 @@ public abstract class AsymmetricGridViewAdapter<T extends AsymmetricItem>
         calculateItemsPerRow(itemsToAdd);
     }
 
-    private RowInfo<T> calculateItemsForRow(final List<T> items) {
-        return calculateItemsForRow(items, listView.getNumColumns());
-    }
-
-    private RowInfo<T> calculateItemsForRow(final List<T> items, final float initialSpaceLeft) {
-        final List<T> itemsThatFit = new ArrayList<>();
-        int currentItem = 0;
-        int rowHeight = 1;
-        float areaLeft = initialSpaceLeft;
-
-        // 돌면서 공간을 찾아 한 줄을 완성한다.
-        while (areaLeft > 0 && currentItem < items.size()) {
-            final T item = items.get(currentItem++);
-            float itemArea = item.getColumnSpan() * item.getColumnSpan();
-
-            if (rowHeight < item.getColumnSpan()) {
-                // 남은 공간에 들어갈 수 없으면 다음 줄에서 시작한다.
-                itemsThatFit.clear();
-                rowHeight = item.getColumnSpan();
-                currentItem = 0;
-                areaLeft = initialSpaceLeft * item.getColumnSpan();
-            } else if (areaLeft >= itemArea) {
-                // 공간이 있으면 넣는다.
-                areaLeft -= itemArea;
-                itemsThatFit.add(item);
-            }
-        }
-
-        return new RowInfo<>(rowHeight, itemsThatFit, areaLeft);
-    }
-
     // 아이템들을 RowInfo 형태로 바꿔둔다.
     private void calculateItemsPerRow(final List<T> itemsToAdd) {
-        List<RowInfo<T>> rows = new ArrayList<>();
 
-        while (!itemsToAdd.isEmpty()) {
-            final RowInfo<T> stuffThatFit = calculateItemsForRow(itemsToAdd);
+        for (int i = 0; i < itemsToAdd.size(); i += 3) {
+            // 둘
+            List<T> itemsThatFit = new ArrayList<>();
+            itemsThatFit.add(itemsToAdd.get(i));
+            float spaceLeft;
+            if (i + 1 >= itemsToAdd.size()) {
+                spaceLeft = 1;
+            } else {
+                spaceLeft = 0;
+                itemsThatFit.add(itemsToAdd.get(i+1));
+            }
+            itemsPerRow.put(getRowCount(), new RowInfo<>(1, itemsThatFit, spaceLeft));
 
-            final List<T> itemsThatFit = stuffThatFit.getItems();
-            if (itemsThatFit.isEmpty()) {
+            // 하나
+            if (i + 2 >= itemsToAdd.size()) {
                 break;
             }
-
-            for (T anItemsThatFit : itemsThatFit)
-                // RowInfo로 완성된 item들은 추가대상 리스트 itemsToAdd에서 제거한다.
-                itemsToAdd.remove(anItemsThatFit);
-
-            rows.add(stuffThatFit);
+            itemsThatFit = new ArrayList<>();
+            itemsThatFit.add(itemsToAdd.get(i+2));
+            itemsPerRow.put(getRowCount(), new RowInfo<>(2, itemsThatFit, 0));
         }
-
-        for (RowInfo<T> row : rows)
-            itemsPerRow.put(getRowCount(), row);
 
         notifyDataSetChanged();
     }
